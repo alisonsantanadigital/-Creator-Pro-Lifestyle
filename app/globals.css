@@ -2,8 +2,8 @@
 @import "tw-animate-css";
 
 @theme inline {
-  --font-serif: var(--font-cormorant), Georgia, "Times New Roman", serif;
-  --font-sans: var(--font-jakarta), system-ui, -apple-system, sans-serif;
+  --font-serif: "Cormorant Garamond", Georgia, "Times New Roman", serif;
+  --font-sans: "Plus Jakarta Sans", system-ui, -apple-system, sans-serif;
 }
 
 @media (prefers-reduced-motion: reduce) {

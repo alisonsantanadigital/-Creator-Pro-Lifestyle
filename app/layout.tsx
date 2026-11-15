@@ -1,21 +1,12 @@
 import type { Metadata } from 'next';
-import { Cormorant_Garamond, Plus_Jakarta_Sans } from 'next/font/google';
+import '@fontsource/cormorant-garamond/400.css';
+import '@fontsource/cormorant-garamond/400-italic.css';
+import '@fontsource/cormorant-garamond/500.css';
+import '@fontsource/cormorant-garamond/600.css';
+import '@fontsource/plus-jakarta-sans/400.css';
+import '@fontsource/plus-jakarta-sans/500.css';
+import '@fontsource/plus-jakarta-sans/600.css';
 import './globals.css';
-
-const cormorant = Cormorant_Garamond({
-  subsets: ['latin'],
-  weight: ['400', '500', '600'],
-  style: ['normal', 'italic'],
-  variable: '--font-cormorant',
-  display: 'swap',
-});
-
-const plusJakarta = Plus_Jakarta_Sans({
-  subsets: ['latin'],
-  weight: ['400', '500', '600'],
-  variable: '--font-jakarta',
-  display: 'swap',
-});
 
 export const metadata: Metadata = {
   title: 'Creator Pro — Lívia Martins | Prumo Creators',
@@ -41,10 +32,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html
-      lang="pt-BR"
-      className={`${cormorant.variable} ${plusJakarta.variable} scroll-smooth`}
-    >
+    <html lang="pt-BR" className="scroll-smooth">
       <body
         suppressHydrationWarning
         className="bg-[#FAF7F2] font-sans text-[#171614] antialiased selection:bg-[#B08D57]/20 selection:text-[#171614]"
