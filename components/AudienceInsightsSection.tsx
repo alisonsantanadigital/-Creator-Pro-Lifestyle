@@ -5,7 +5,7 @@ export function AudienceInsightsSection() {
     <section
       id="insights"
       aria-labelledby="insights-heading"
-      className="border-y border-[#171614]/12 bg-[#F4EFE6]/70 py-14 sm:py-16"
+      className="scroll-mt-20 border-y border-[#171614]/12 bg-[#F4EFE6]/70 py-14 sm:py-16"
     >
       <div className="mx-auto max-w-[1200px] px-6 sm:px-10">
         {/* Header Row */}
@@ -54,9 +54,26 @@ export function AudienceInsightsSection() {
           ))}
         </div>
 
+        {/* Audience Profile Row */}
+        <div className="border-t border-[#171614]/12 pt-6 pb-5">
+          <p className="text-xs font-medium tracking-[0.12em] text-[#8A6836]">
+            {AUDIENCE_INSIGHTS.audienceProfileTitle}
+          </p>
+          <dl className="mt-4 grid grid-cols-1 gap-x-8 gap-y-4 sm:grid-cols-2 lg:grid-cols-4">
+            {AUDIENCE_INSIGHTS.audienceProfile.map((attr) => (
+              <div key={attr.label}>
+                <dt className="text-xs text-[#6B6359]">{attr.label}</dt>
+                <dd className="mt-1 text-sm font-medium text-[#171614]">
+                  {attr.value}
+                </dd>
+              </div>
+            ))}
+          </dl>
+        </div>
+
         {/* Subtitle & Transparency Line */}
-        <p className="border-t border-[#171614]/10 pt-5 text-xs text-[#6B6359]">
-          {AUDIENCE_INSIGHTS.sectionSubtitle} Todos os números exibidos são fictícios para fins de demonstração comercial.
+        <p className="border-t border-[#171614]/10 pt-4 text-xs text-[#6B6359]">
+          {AUDIENCE_INSIGHTS.sectionSubtitle} Todos os números e perfis exibidos são fictícios para fins de demonstração comercial.
         </p>
       </div>
     </section>

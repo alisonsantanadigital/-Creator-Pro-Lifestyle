@@ -16,6 +16,11 @@ export interface AudienceMetric {
   context: string;
 }
 
+export interface AudienceProfileAttribute {
+  label: string;
+  value: string;
+}
+
 export interface CampaignItem {
   id: string;
   title: string;
@@ -47,6 +52,7 @@ export const CREATOR_PROFILE = {
   heroCta: 'Vamos construir uma parceria?',
   instagramHandle: '@liviamartins.demo',
   tiktokHandle: '@liviamartins.demo',
+  isDemo: true,
 } as const;
 
 export const AUDIENCE_INSIGHTS = {
@@ -81,22 +87,31 @@ export const AUDIENCE_INSIGHTS = {
       context: 'Média ponderada por interações e salvamentos',
     },
   ] satisfies AudienceMetric[],
+  audienceProfileTitle: 'Perfil da audiência (demonstrativo)',
+  audienceProfile: [
+    { label: 'Público predominante', value: 'Feminino · 78%' },
+    { label: 'Faixa etária principal', value: '24 a 38 anos' },
+    { label: 'Localização concentrada', value: 'Sudeste e Sul · Capitais' },
+    { label: 'Interesses-chave', value: 'Skincare, bem-estar, casa e viagens' },
+  ] satisfies AudienceProfileAttribute[],
 };
 
 export const ABOUT_SECTION = {
   kicker: 'Sobre a criadora',
   headline: 'Estética editorial aplicada a histórias reais de consumo e estilo de vida.',
   paragraphs: [
-    'Lívia Martins traduz o cotidiano contemporâneo com olhar curatorial para beleza consciente, design de rotina e hospitalidade autoral. Sua produção combina direção de arte serena, luz natural e uma relação de confiança construída ao longo de anos com uma audiência atenta a qualidade e procedência.',
+    'Lívia Martins traduz o cotidiano contemporâneo com olhar curatorial para beleza consciente, design de rotina e hospitalidade autoral. Sua produção combina direção de arte serena, luz natural e uma relação de confiança construída com uma audiência atenta a qualidade e procedência.',
     'Em projetos comerciais, atua lado a lado com equipes de marca e agências desde o desdobramento criativo até a entrega final, garantindo coerência visual entre o universo da anunciante e a linguagem orgânica que sustenta sua comunidade.',
   ],
   image: aboutLiviaImg,
   imageAlt:
     'Lívia Martins em ambiente de estúdio iluminado por luz natural, sentada à mesa de travertino com caderno editorial e xícara de cerâmica.',
+  imageCaptionLeft: 'Direção criativa e rotina editorial',
+  imageCaptionRight: 'Acervo demonstrativo',
   credentials: [
     { label: 'Base editorial', value: 'São Paulo · Atuação nacional' },
     { label: 'Territórios de conteúdo', value: 'Lifestyle, Beleza e Experiências' },
-    { label: 'Perfil predominante', value: 'Público adulto · 24 a 38 anos' },
+    { label: 'Formato de entrega', value: 'Produção autoral sob briefing' },
   ],
 } as const;
 
@@ -216,13 +231,30 @@ export const DEMO_CONTACT = {
   kicker: 'Contato Comercial',
   headline: 'Vamos desenhar a próxima campanha da sua marca.',
   description:
-    'Entre em contato para solicitar o Media Kit completo em PDF, consultar janelas de agenda ou receber uma proposta desenhada sob medida para o seu briefing.',
-  whatsappLabel: 'Contato via WhatsApp',
+    'Solicite um orçamento direto pelo WhatsApp ou e-mail comercial para consultar disponibilidade de agenda, formatos recomendados e condições de parceria.',
+  whatsappLabel: 'Solicitar orçamento via WhatsApp',
   whatsappValue: '+55 (11) 90000-0000',
   emailLabel: 'E-mail comercial demonstrativo',
   emailValue: 'comercial@liviamartins.demo',
   instagramLabel: 'Instagram demonstrativo',
   instagramValue: '@liviamartins.demo',
   footerNote:
-    'Os contatos acima são exclusivamente demonstrativos e pertencem à vitrine conceitual do produto Creator Pro — Prumo Creators. Não realizam atendimento ou envio real.',
+    'Os contatos e indicadores acima são exclusivamente demonstrativos e pertencem à vitrine conceitual do produto Creator Pro — Prumo Creators. Não realizam atendimento ou envio real.',
+} as const;
+
+export function buildWhatsappProposalMessage(selectedFormat: string | null): string {
+  if (selectedFormat) {
+    return `Olá! Gostaria de solicitar um orçamento para parceria no formato "${selectedFormat}" com ${CREATOR_PROFILE.name} (${CREATOR_PROFILE.productName} · ${CREATOR_PROFILE.brandHouse}).`;
+  }
+  return `Olá! Gostaria de solicitar o Media Kit e um orçamento de parceria comercial com ${CREATOR_PROFILE.name} (${CREATOR_PROFILE.productName} · ${CREATOR_PROFILE.brandHouse}).`;
+}
+
+export const CREATOR_SHOWCASE_CONFIG = {
+  profile: CREATOR_PROFILE,
+  heroMedia: HERO_MEDIA,
+  insights: AUDIENCE_INSIGHTS,
+  about: ABOUT_SECTION,
+  campaigns: DEMO_CAMPAIGNS,
+  formats: PARTNERSHIP_FORMATS,
+  contact: DEMO_CONTACT,
 } as const;

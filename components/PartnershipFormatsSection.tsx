@@ -24,11 +24,11 @@ export function PartnershipFormatsSection({
     <section
       id="formatos"
       aria-labelledby="formatos-heading"
-      className="border-t border-[#171614]/12 bg-[#FAF7F2] py-20 sm:py-24 lg:py-28"
+      className="scroll-mt-20 border-t border-[#171614]/12 bg-[#FAF7F2] py-16 sm:py-24 lg:py-28"
     >
       <div className="mx-auto max-w-[1200px] px-6 sm:px-10">
         <div className="grid grid-cols-1 gap-10 lg:grid-cols-12 lg:gap-16">
-          {/* Left Sticky-Free Editorial Lead */}
+          {/* Left Editorial Lead */}
           <div className="lg:col-span-4">
             <p className="text-xs font-medium tracking-[0.14em] text-[#8A6836]">
               Formatos de Parceria
@@ -56,7 +56,7 @@ export function PartnershipFormatsSection({
                     key={format.number}
                     className="grid grid-cols-1 gap-4 border-t border-[#171614]/12 py-7 sm:grid-cols-12 sm:items-start sm:gap-6"
                   >
-                    <div className="sm:col-span-2">
+                    <div className="sm:col-span-1">
                       <span className="font-serif text-2xl font-normal text-[#8A6836] tabular-nums">
                         {format.number}.
                       </span>
@@ -77,17 +77,19 @@ export function PartnershipFormatsSection({
                       </p>
                     </div>
 
-                    <div className="sm:col-span-3 sm:flex sm:justify-end">
+                    <div className="sm:col-span-4 sm:flex sm:justify-end">
                       <button
                         type="button"
                         onClick={() => handleConsultFormat(format.title)}
-                        className={`group inline-flex min-h-[40px] items-center gap-1.5 border px-4 py-2 text-xs font-medium whitespace-nowrap shrink-0 transition-colors duration-150 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#8A6836] ${
+                        className={`group inline-flex min-h-[44px] w-full items-center justify-center gap-1.5 border px-4 py-2.5 text-xs font-medium whitespace-nowrap shrink-0 transition-colors duration-150 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#8A6836] sm:w-auto ${
                           isSelected
                             ? 'border-[#8A6836] bg-[#F2ECE1] text-[#171614]'
                             : 'border-[#171614]/20 bg-transparent text-[#171614] hover:border-[#8A6836] hover:bg-[#F4EFE6]'
                         }`}
                       >
-                        <span>{isSelected ? 'Selecionado' : 'Consultar'}</span>
+                        <span>
+                          {isSelected ? 'Selecionado no orçamento' : 'Solicitar orçamento'}
+                        </span>
                         <ArrowRight className="h-3.5 w-3.5 text-[#8A6836] transition-transform duration-150 group-hover:translate-x-0.5" />
                       </button>
                     </div>

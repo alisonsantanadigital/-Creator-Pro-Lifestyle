@@ -3,9 +3,13 @@ import { ABOUT_SECTION } from '@/lib/creator-data';
 
 export function AboutSection() {
   return (
-    <section id="sobre" aria-labelledby="sobre-heading" className="py-20 sm:py-24 lg:py-28">
+    <section
+      id="sobre"
+      aria-labelledby="sobre-heading"
+      className="scroll-mt-20 py-16 sm:py-24 lg:py-28"
+    >
       <div className="mx-auto max-w-[1200px] px-6 sm:px-10">
-        <div className="grid grid-cols-1 items-center gap-12 lg:grid-cols-12 lg:gap-16">
+        <div className="grid grid-cols-1 items-center gap-10 lg:grid-cols-12 lg:gap-16">
           {/* Secondary Editorial Photograph */}
           <div className="lg:col-span-5">
             <figure className="border border-[#171614]/12 p-2.5 sm:p-3">
@@ -16,12 +20,9 @@ export function AboutSection() {
                 aspectClassName="aspect-[4/3]"
                 fallbackTitle="Lívia Martins · Estúdio"
               />
-              <figcaption className="flex items-center justify-between pt-3 pb-1 text-xs text-[#6B6359]">
-                <span>Direção criativa e rotina editorial</span>
-                <span aria-hidden="true" className="text-[#B08D57]">
-                  ·
-                </span>
-                <span>Acervo demonstrativo</span>
+              <figcaption className="flex flex-wrap items-center justify-between gap-2 pt-3 pb-1 text-xs text-[#6B6359]">
+                <span>{ABOUT_SECTION.imageCaptionLeft}</span>
+                <span className="text-[#8A6836]">{ABOUT_SECTION.imageCaptionRight}</span>
               </figcaption>
             </figure>
           </div>

@@ -10,7 +10,11 @@ import {
   MessageCircle,
 } from 'lucide-react';
 import { useState } from 'react';
-import { CREATOR_PROFILE, DEMO_CONTACT } from '@/lib/creator-data';
+import {
+  buildWhatsappProposalMessage,
+  CREATOR_PROFILE,
+  DEMO_CONTACT,
+} from '@/lib/creator-data';
 
 interface CommercialContactSectionProps {
   selectedFormat: string | null;
@@ -23,14 +27,29 @@ export function CommercialContactSection({
 }: CommercialContactSectionProps) {
   const [contactFeedback, setContactFeedback] = useState<string | null>(null);
   const [emailCopied, setEmailCopied] = useState(false);
+  const [messageCopied, setMessageCopied] = useState(false);
+
+  const preformattedMessage = buildWhatsappProposalMessage(selectedFormat);
 
   const handleWhatsappDemo = () => {
-    const formatContext = selectedFormat
-      ? ` com interesse em "${selectedFormat}"`
-      : '';
     setContactFeedback(
-      `Canal demonstrativo (WhatsApp ${DEMO_CONTACT.whatsappValue})${formatContext}: na versão publicada do Creator Pro, este botão abre o atendimento comercial real da criadora. Nenhum envio externo foi realizado.`
+      `Canal demonstrativo (WhatsApp ${DEMO_CONTACT.whatsappValue}): mensagem pré-formatada preparada — "${preformattedMessage}". Em um perfil publicado do Creator Pro, este botão abre diretamente a conversa comercial da influenciadora.`
     );
+  };
+
+  const handleCopyMessageDemo = async () => {
+    try {
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        await navigator.clipboard.writeText(preformattedMessage);
+      }
+      setMessageCopied(true);
+      setContactFeedback(
+        'Mensagem comercial pré-formatada copiada para sua área de transferência.'
+      );
+      window.setTimeout(() => setMessageCopied(false), 3500);
+    } catch {
+      setContactFeedback(`Mensagem sugerida: "${preformattedMessage}"`);
+    }
   };
 
   const handleCopyEmailDemo = async () => {
@@ -68,10 +87,10 @@ export function CommercialContactSection({
     <footer
       id="contato"
       aria-labelledby="contato-heading"
-      className="border-t border-[#171614]/12 bg-[#F2ECE1] pt-20 pb-12 sm:pt-24"
+      className="scroll-mt-20 border-t border-[#171614]/12 bg-[#F2ECE1] pt-16 pb-12 sm:pt-24"
     >
       <div className="mx-auto max-w-[1200px] px-6 sm:px-10">
-        <div className="grid grid-cols-1 gap-12 lg:grid-cols-12 lg:gap-16">
+        <div className="grid grid-cols-1 gap-10 lg:grid-cols-12 lg:gap-16">
           {/* Left Proposal Callout */}
           <div className="lg:col-span-6">
             <p className="text-xs font-medium tracking-[0.14em] text-[#8A6836]">
@@ -87,26 +106,45 @@ export function CommercialContactSection({
               {DEMO_CONTACT.description}
             </p>
 
-            {selectedFormat && (
-              <div className="mt-6 flex flex-wrap items-center gap-3 border-t border-[#171614]/12 pt-4 text-xs text-[#3F3B36]">
-                <span>
-                  Formato de interesse:{' '}
-                  <strong className="font-medium text-[#171614]">
-                    {selectedFormat}
-                  </strong>
-                </span>
-                <span aria-hidden="true" className="text-[#B08D57]">
-                  ·
-                </span>
-                <button
-                  type="button"
-                  onClick={onClearFormat}
-                  className="font-medium text-[#8A6836] underline underline-offset-4 transition-colors hover:text-[#171614]"
-                >
-                  Limpar seleção
-                </button>
+            {/* Pre-formatted WhatsApp Message Preview */}
+            <div className="mt-7 border-t border-[#171614]/12 pt-5">
+              <div className="flex flex-wrap items-center justify-between gap-2">
+                <p className="text-xs font-medium text-[#6B6359]">
+                  Mensagem pré-formatada para WhatsApp
+                </p>
+                {selectedFormat && (
+                  <button
+                    type="button"
+                    onClick={onClearFormat}
+                    className="text-xs font-medium text-[#8A6836] underline underline-offset-4 transition-colors hover:text-[#171614]"
+                  >
+                    Limpar formato ({selectedFormat})
+                  </button>
+                )}
               </div>
-            )}
+
+              <p className="mt-2.5 font-serif text-lg leading-snug italic text-[#2D2A26]">
+                “{preformattedMessage}”
+              </p>
+
+              <button
+                type="button"
+                onClick={handleCopyMessageDemo}
+                className="mt-3 inline-flex min-h-[36px] items-center gap-1.5 text-xs font-medium text-[#171614] underline decoration-[#B08D57] underline-offset-4 transition-colors hover:text-[#8A6836]"
+              >
+                {messageCopied ? (
+                  <>
+                    <Check className="h-3.5 w-3.5 text-[#8A6836]" />
+                    <span>Mensagem copiada</span>
+                  </>
+                ) : (
+                  <>
+                    <Copy className="h-3.5 w-3.5 text-[#8A6836]" />
+                    <span>Copiar mensagem pré-formatada</span>
+                  </>
+                )}
+              </button>
+            </div>
           </div>
 
           {/* Right Demonstrative Contact Channels */}
@@ -116,16 +154,16 @@ export function CommercialContactSection({
               <button
                 type="button"
                 onClick={handleWhatsappDemo}
-                className="group flex min-h-[56px] w-full items-center justify-between gap-4 border border-[#171614] bg-[#171614] px-6 py-4 text-left text-[#FAF7F2] transition-colors duration-150 hover:border-[#8A6836] hover:bg-[#26231F] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#8A6836]"
+                className="group flex min-h-[58px] w-full items-center justify-between gap-4 border border-[#171614] bg-[#171614] px-6 py-4 text-left text-[#FAF7F2] transition-colors duration-150 hover:border-[#8A6836] hover:bg-[#26231F] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#8A6836]"
               >
-                <div className="flex items-center gap-3.5">
+                <div className="flex items-center gap-3.5 min-w-0">
                   <MessageCircle className="h-4 w-4 shrink-0 text-[#D4B98C]" />
-                  <div>
+                  <div className="min-w-0">
                     <p className="text-sm font-medium">
                       {DEMO_CONTACT.whatsappLabel}
                     </p>
-                    <p className="text-xs text-[#D8D0C4]">
-                      {DEMO_CONTACT.whatsappValue} · Canal demonstrativo
+                    <p className="truncate text-xs text-[#D8D0C4]">
+                      {DEMO_CONTACT.whatsappValue} · Atendimento demonstrativo
                     </p>
                   </div>
                 </div>
@@ -136,7 +174,7 @@ export function CommercialContactSection({
               <button
                 type="button"
                 onClick={handleCopyEmailDemo}
-                className="group flex min-h-[56px] w-full items-center justify-between gap-4 border border-[#171614]/20 bg-[#FAF7F2] px-6 py-4 text-left transition-colors duration-150 hover:border-[#8A6836] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#8A6836]"
+                className="group flex min-h-[58px] w-full items-center justify-between gap-4 border border-[#171614]/20 bg-[#FAF7F2] px-6 py-4 text-left transition-colors duration-150 hover:border-[#8A6836] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#8A6836]"
               >
                 <div className="flex items-center gap-3.5 min-w-0">
                   <Mail className="h-4 w-4 shrink-0 text-[#8A6836]" />
@@ -168,15 +206,15 @@ export function CommercialContactSection({
               <button
                 type="button"
                 onClick={handleInstagramDemo}
-                className="group flex min-h-[56px] w-full items-center justify-between gap-4 border border-[#171614]/20 bg-[#FAF7F2] px-6 py-4 text-left transition-colors duration-150 hover:border-[#8A6836] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#8A6836]"
+                className="group flex min-h-[58px] w-full items-center justify-between gap-4 border border-[#171614]/20 bg-[#FAF7F2] px-6 py-4 text-left transition-colors duration-150 hover:border-[#8A6836] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#8A6836]"
               >
-                <div className="flex items-center gap-3.5">
+                <div className="flex items-center gap-3.5 min-w-0">
                   <Instagram className="h-4 w-4 shrink-0 text-[#8A6836]" />
-                  <div>
+                  <div className="min-w-0">
                     <p className="text-xs text-[#6B6359]">
                       {DEMO_CONTACT.instagramLabel}
                     </p>
-                    <p className="text-sm font-medium text-[#171614]">
+                    <p className="truncate text-sm font-medium text-[#171614]">
                       {DEMO_CONTACT.instagramValue}
                     </p>
                   </div>
