@@ -46,34 +46,73 @@ export function HeroSection() {
     <section
       id="topo"
       ref={sectionRef}
-      className="relative scroll-mt-20 overflow-x-clip bg-transparent pt-8 pb-16 sm:pt-12 sm:pb-24 lg:pt-14 lg:pb-28"
+      className="relative scroll-mt-20 overflow-x-clip bg-transparent pt-0 pb-16 sm:pb-24 lg:pt-2 lg:pb-28"
     >
       <div className="mx-auto max-w-[1240px] px-6 sm:px-10">
-        {/* Top Editorial Margin Strip */}
-        <div className="relative mb-8 flex flex-wrap items-center justify-between gap-3 pb-4 text-xs text-[#39483C]">
-          <motion.div
-            animate={prefersReducedMotion ? undefined : { y: [0, -2.5, 0] }}
-            transition={{ duration: 6, repeat: Infinity, ease: 'easeInOut' }}
-            className="flex items-center gap-2 font-medium"
-          >
-            <Compass className="h-3.5 w-3.5 text-[#BD765B]" aria-hidden="true" />
-            <span>{CREATOR_PROFILE.headerMetaLeft}</span>
-          </motion.div>
+        <div className="grid grid-cols-1 items-center gap-0 lg:grid-cols-12 lg:gap-6">
+          {/* Borderless Infinite-Edge Hero Photograph — Top/Header Position on Mobile & Desktop */}
+          <div className="relative order-1 -mx-6 sm:-mx-10 lg:order-2 lg:col-span-7 lg:mx-0 lg:-mr-8 xl:-mr-14">
+            <div
+              aria-hidden="true"
+              className="pointer-events-none absolute inset-4 -z-10 rounded-full bg-[radial-gradient(circle_at_50%_44%,rgba(245,241,233,0.75)_0%,rgba(220,209,192,0.28)_50%,transparent_80%)] blur-3xl"
+            />
 
-          <div className="flex items-center gap-2.5 text-[#585850]">
-            <span>{CREATOR_PROFILE.headerMetaRight}</span>
+            <motion.div
+              style={{
+                ...(prefersReducedMotion ? {} : { y: portraitParallaxY }),
+                maskImage:
+                  'radial-gradient(ellipse 75% 78% at 50% 44%, #000000 46%, rgba(0,0,0,0.88) 63%, rgba(0,0,0,0.4) 80%, rgba(0,0,0,0) 97%)',
+                WebkitMaskImage:
+                  'radial-gradient(ellipse 75% 78% at 50% 44%, #000000 46%, rgba(0,0,0,0.88) 63%, rgba(0,0,0,0.4) 80%, rgba(0,0,0,0) 97%)',
+              }}
+              initial={prefersReducedMotion ? false : { opacity: 0.72, scale: 0.985 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 0.9, ease: [0.22, 1, 0.36, 1] }}
+              className="relative w-full"
+            >
+              {HERO_MEDIA.videoUrl ? (
+                <div className="relative h-[410px] w-full sm:h-[500px] lg:h-auto lg:min-h-[690px]">
+                  <video
+                    src={HERO_MEDIA.videoUrl}
+                    autoPlay
+                    muted
+                    loop
+                    playsInline
+                    className="h-full w-full object-cover object-[50%_20%]"
+                  />
+                </div>
+              ) : (
+                <EditorialImage
+                  src={HERO_MEDIA.image}
+                  alt={HERO_MEDIA.imageAlt}
+                  priority
+                  softFade
+                  sizes="(max-width: 1024px) 100vw, 58vw"
+                  aspectClassName="h-[410px] w-full sm:h-[500px] lg:aspect-[3/4] lg:h-auto lg:min-h-[690px]"
+                  fallbackTitle={CREATOR_PROFILE.name}
+                  className="object-[50%_20%] lg:object-top"
+                />
+              )}
+            </motion.div>
           </div>
 
-          <div
-            aria-hidden="true"
-            className="absolute right-0 bottom-0 left-0 h-px bg-gradient-to-r from-[#DCD1C0]/85 via-[#DCD1C0]/50 to-transparent"
-          />
-        </div>
+          {/* Left Editorial Column (Dissolves up seamlessly below photo on mobile; aligned left on desktop) */}
+          <div className="relative z-10 order-2 -mt-12 flex flex-col justify-between lg:order-1 lg:col-span-5 lg:mt-0 lg:py-8">
+            <div className="lg:my-auto lg:py-4">
+              {/* Subtle Header Meta Integrated Inside Editorial Lead */}
+              <motion.div
+                animate={prefersReducedMotion ? undefined : { y: [0, -2, 0] }}
+                transition={{ duration: 6, repeat: Infinity, ease: 'easeInOut' }}
+                className="mb-5 flex flex-wrap items-center gap-x-2.5 gap-y-1 text-xs text-[#39483C]"
+              >
+                <Compass className="h-3.5 w-3.5 text-[#BD765B]" aria-hidden="true" />
+                <span className="font-medium">{CREATOR_PROFILE.headerMetaLeft}</span>
+                <span aria-hidden="true" className="text-[#BD765B]">
+                  ·
+                </span>
+                <span className="text-[#585850]">{CREATOR_PROFILE.headerMetaRight}</span>
+              </motion.div>
 
-        <div className="grid grid-cols-1 items-center gap-10 lg:grid-cols-12 lg:gap-6">
-          {/* Left Column: Editorial Typography Integrated Directly onto Canvas */}
-          <div className="relative z-10 flex flex-col justify-between lg:col-span-5 lg:py-8">
-            <div className="my-4 lg:my-auto lg:py-6">
               <motion.p
                 initial={prefersReducedMotion ? false : { opacity: 0, y: 12 }}
                 animate={{ opacity: 1, y: 0 }}
@@ -84,7 +123,7 @@ export function HeroSection() {
               </motion.p>
 
               {/* Staggered Word-by-Word Vertical Name Reveal */}
-              <h1 className="mt-4 font-serif text-[clamp(3.25rem,6.5vw,5.6rem)] leading-[0.94] font-normal tracking-[-0.025em] text-[#282824] text-balance">
+              <h1 className="mt-3 font-serif text-[clamp(3rem,6.5vw,5.6rem)] leading-[0.94] font-normal tracking-[-0.025em] text-[#282824] text-balance">
                 {nameWords.map((word, index) => (
                   <span
                     key={word}
@@ -113,7 +152,7 @@ export function HeroSection() {
                 initial={prefersReducedMotion ? false : { scaleX: 0 }}
                 animate={{ scaleX: 1 }}
                 transition={{ duration: 0.6, delay: 0.25, ease: [0.22, 1, 0.36, 1] }}
-                className="mt-6 h-px w-16 origin-left bg-[#BD765B]"
+                className="mt-5 h-px w-16 origin-left bg-[#BD765B]"
                 aria-hidden="true"
               />
 
@@ -122,7 +161,7 @@ export function HeroSection() {
                 initial={prefersReducedMotion ? false : { opacity: 0, y: 16 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.65, delay: 0.28, ease: [0.22, 1, 0.36, 1] }}
-                className="mt-6 max-w-md font-serif text-[clamp(1.55rem,2.3vw,2rem)] leading-[1.24] text-[#39483C]"
+                className="mt-5 max-w-md font-serif text-[clamp(1.5rem,2.3vw,2rem)] leading-[1.24] text-[#39483C]"
               >
                 {CREATOR_PROFILE.positioning}
               </motion.p>
@@ -141,7 +180,7 @@ export function HeroSection() {
                 initial={prefersReducedMotion ? false : { opacity: 0, y: 14 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: 0.44, ease: [0.22, 1, 0.36, 1] }}
-                className="mt-10 flex flex-wrap items-center gap-5"
+                className="mt-8 flex flex-wrap items-center gap-5 sm:mt-10"
               >
                 <MagneticCtaButton
                   href="#contato"
@@ -198,53 +237,6 @@ export function HeroSection() {
                 )}
               </div>
             </div>
-          </div>
-
-          {/* Right Column: Borderless Infinite-Edge Photograph Dissolving Seamlessly Into Canvas */}
-          <div className="relative lg:col-span-7 lg:-mr-8 xl:-mr-14">
-            {/* Soft warm halo directly behind her silhouette to harmonize with the global background */}
-            <div
-              aria-hidden="true"
-              className="pointer-events-none absolute inset-4 -z-10 rounded-full bg-[radial-gradient(circle_at_50%_45%,rgba(245,241,233,0.75)_0%,rgba(220,209,192,0.28)_50%,transparent_80%)] blur-3xl"
-            />
-
-            <motion.div
-              style={{
-                ...(prefersReducedMotion ? {} : { y: portraitParallaxY }),
-                maskImage:
-                  'radial-gradient(ellipse 72% 76% at 50% 45%, #000000 46%, rgba(0,0,0,0.88) 62%, rgba(0,0,0,0.42) 79%, rgba(0,0,0,0) 97%)',
-                WebkitMaskImage:
-                  'radial-gradient(ellipse 72% 76% at 50% 45%, #000000 46%, rgba(0,0,0,0.88) 62%, rgba(0,0,0,0.42) 79%, rgba(0,0,0,0) 97%)',
-              }}
-              initial={prefersReducedMotion ? false : { opacity: 0.72, scale: 0.985 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{ duration: 0.9, ease: [0.22, 1, 0.36, 1] }}
-              className="relative w-full"
-            >
-              {HERO_MEDIA.videoUrl ? (
-                <div className="relative aspect-[3/4] w-full lg:aspect-auto lg:min-h-[680px]">
-                  <video
-                    src={HERO_MEDIA.videoUrl}
-                    autoPlay
-                    muted
-                    loop
-                    playsInline
-                    className="h-full w-full object-cover object-top"
-                  />
-                </div>
-              ) : (
-                <EditorialImage
-                  src={HERO_MEDIA.image}
-                  alt={HERO_MEDIA.imageAlt}
-                  priority
-                  softFade
-                  sizes="(max-width: 1024px) 100vw, 58vw"
-                  aspectClassName="aspect-[3/4] w-full lg:min-h-[680px]"
-                  fallbackTitle={CREATOR_PROFILE.name}
-                  className="object-top"
-                />
-              )}
-            </motion.div>
           </div>
         </div>
       </div>

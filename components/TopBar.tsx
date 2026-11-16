@@ -27,7 +27,7 @@ export function TopBar() {
   };
 
   return (
-    <header className="sticky top-0 z-40 border-b border-[#DCD1C0]/60 bg-white/75 backdrop-blur-md">
+    <header className="sticky top-0 z-40 border-b border-[#DCD1C0]/45 bg-white/68 backdrop-blur-md">
       <div className="mx-auto flex h-16 max-w-[1240px] items-center justify-between gap-8 px-6 sm:px-10">
         {/* Zone 1: Single-line Brand Wordmark */}
         <a
