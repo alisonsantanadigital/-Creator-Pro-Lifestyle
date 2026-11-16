@@ -28,19 +28,19 @@ function getSlideContainerClass(aspect: CampaignItem['aspect']): {
   switch (aspect) {
     case 'portrait':
       return {
-        widthClass: 'w-[78vw] sm:w-[330px] lg:w-[360px]',
-        aspectClass: 'aspect-[3/4]',
+        widthClass: 'w-[240px] sm:w-[290px] lg:w-[320px]',
+        aspectClass: 'aspect-[4/5]',
       };
     case 'wide':
       return {
-        widthClass: 'w-[86vw] sm:w-[520px] lg:w-[580px]',
+        widthClass: 'w-[290px] sm:w-[440px] lg:w-[580px]',
         aspectClass: 'aspect-[16/9]',
       };
     case 'landscape':
     default:
       return {
-        widthClass: 'w-[82vw] sm:w-[410px] lg:w-[440px]',
-        aspectClass: 'aspect-[4/3]',
+        widthClass: 'w-[270px] sm:w-[360px] lg:w-[440px]',
+        aspectClass: 'aspect-[16/9]',
       };
   }
 }
@@ -371,10 +371,15 @@ export function CampaignsSection() {
                           src={campaign.image}
                           alt={campaign.imageAlt}
                           softFade
-                          sizes="(max-width: 768px) 85vw, 520px"
+                          sizes="(max-width: 640px) 290px, 580px"
                           aspectClassName={aspectClass}
                           fallbackTitle={campaign.title}
-                          className="transition-transform duration-500 ease-out group-hover:scale-[1.02]"
+                          className={`${
+                            campaign.imagePositionClass ??
+                            (campaign.aspect === 'portrait'
+                              ? 'object-top'
+                              : 'object-center')
+                          } transition-transform duration-500 ease-out group-hover:scale-[1.02]`}
                         />
                       )}
 

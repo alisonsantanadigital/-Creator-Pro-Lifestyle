@@ -49,9 +49,9 @@ export function HeroSection() {
       className="relative scroll-mt-20 overflow-x-clip bg-transparent pt-0 pb-16 sm:pb-24 lg:pt-2 lg:pb-28"
     >
       <div className="mx-auto max-w-[1240px] px-6 sm:px-10">
-        <div className="grid grid-cols-1 items-center gap-0 lg:grid-cols-12 lg:gap-6">
-          {/* Borderless Infinite-Edge Hero Photograph — Top/Header Position on Mobile & Desktop */}
-          <div className="relative order-1 -mx-6 sm:-mx-10 lg:order-2 lg:col-span-7 lg:mx-0 lg:-mr-8 xl:-mr-14">
+        <div className="grid grid-cols-1 items-center gap-6 lg:grid-cols-12 lg:gap-8">
+          {/* Borderless Infinite-Edge Hero Photograph — Reduced & Real Proportions */}
+          <div className="relative order-1 mx-auto w-full max-w-[420px] sm:max-w-[540px] lg:order-2 lg:col-span-6 lg:mr-0 lg:ml-auto lg:max-w-[460px] xl:max-w-[500px]">
             <div
               aria-hidden="true"
               className="pointer-events-none absolute inset-4 -z-10 rounded-full bg-[radial-gradient(circle_at_50%_44%,rgba(245,241,233,0.75)_0%,rgba(220,209,192,0.28)_50%,transparent_80%)] blur-3xl"
@@ -61,9 +61,9 @@ export function HeroSection() {
               style={{
                 ...(prefersReducedMotion ? {} : { y: portraitParallaxY }),
                 maskImage:
-                  'radial-gradient(ellipse 75% 78% at 50% 44%, #000000 46%, rgba(0,0,0,0.88) 63%, rgba(0,0,0,0.4) 80%, rgba(0,0,0,0) 97%)',
+                  'radial-gradient(ellipse 76% 80% at 50% 45%, #000000 46%, rgba(0,0,0,0.88) 63%, rgba(0,0,0,0.4) 80%, rgba(0,0,0,0) 97%)',
                 WebkitMaskImage:
-                  'radial-gradient(ellipse 75% 78% at 50% 44%, #000000 46%, rgba(0,0,0,0.88) 63%, rgba(0,0,0,0.4) 80%, rgba(0,0,0,0) 97%)',
+                  'radial-gradient(ellipse 76% 80% at 50% 45%, #000000 46%, rgba(0,0,0,0.88) 63%, rgba(0,0,0,0.4) 80%, rgba(0,0,0,0) 97%)',
               }}
               initial={prefersReducedMotion ? false : { opacity: 0.72, scale: 0.985 }}
               animate={{ opacity: 1, scale: 1 }}
@@ -71,14 +71,14 @@ export function HeroSection() {
               className="relative w-full"
             >
               {HERO_MEDIA.videoUrl ? (
-                <div className="relative h-[410px] w-full sm:h-[500px] lg:h-auto lg:min-h-[690px]">
+                <div className="relative aspect-[16/9] w-full lg:aspect-[3/4]">
                   <video
                     src={HERO_MEDIA.videoUrl}
                     autoPlay
                     muted
                     loop
                     playsInline
-                    className="h-full w-full object-cover object-[50%_20%]"
+                    className="h-full w-full object-cover object-[50%_22%] lg:object-top"
                   />
                 </div>
               ) : (
@@ -87,17 +87,17 @@ export function HeroSection() {
                   alt={HERO_MEDIA.imageAlt}
                   priority
                   softFade
-                  sizes="(max-width: 1024px) 100vw, 58vw"
-                  aspectClassName="h-[410px] w-full sm:h-[500px] lg:aspect-[3/4] lg:h-auto lg:min-h-[690px]"
+                  sizes="(max-width: 1024px) 100vw, 500px"
+                  aspectClassName="aspect-[16/9] w-full lg:aspect-[3/4]"
                   fallbackTitle={CREATOR_PROFILE.name}
-                  className="object-[50%_20%] lg:object-top"
+                  className="object-[50%_22%] lg:object-top"
                 />
               )}
             </motion.div>
           </div>
 
-          {/* Left Editorial Column (Dissolves up seamlessly below photo on mobile; aligned left on desktop) */}
-          <div className="relative z-10 order-2 -mt-12 flex flex-col justify-between lg:order-1 lg:col-span-5 lg:mt-0 lg:py-8">
+          {/* Left Editorial Column (Cleanly below mobile 16:9 hero photo; aligned left on desktop) */}
+          <div className="relative z-10 order-2 flex flex-col justify-between lg:order-1 lg:col-span-6 lg:py-8">
             <div className="lg:my-auto lg:py-4">
               {/* Subtle Header Meta Integrated Inside Editorial Lead */}
               <motion.div

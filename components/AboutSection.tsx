@@ -47,15 +47,16 @@ export function AboutSection() {
             whileInView={{ opacity: 1, scale: 1 }}
             viewport={{ once: true, amount: 0.25 }}
             transition={{ duration: 0.85, ease: [0.22, 1, 0.36, 1] }}
-            className="lg:col-span-6"
+            className="mx-auto w-full max-w-[290px] sm:max-w-[420px] lg:col-span-6 lg:mx-0 lg:max-w-[540px]"
           >
             <EditorialImage
               src={ABOUT_SECTION.image}
               alt={ABOUT_SECTION.imageAlt}
               softFade
-              sizes="(max-width: 1024px) 100vw, 48vw"
-              aspectClassName="aspect-[4/3]"
+              sizes="(max-width: 640px) 290px, (max-width: 1024px) 420px, 540px"
+              aspectClassName="aspect-[16/9]"
               fallbackTitle="Lívia Martins · Estúdio"
+              className="object-[50%_22%]"
             />
           </motion.div>
 

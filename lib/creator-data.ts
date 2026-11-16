@@ -46,6 +46,7 @@ export interface CampaignItem {
   aspect: EditorialAspect;
   image: StaticImageData;
   imageAlt: string;
+  imagePositionClass?: string;
   /** Optional real video URL when available. Leave undefined when only photography exists. */
   videoUrl?: string;
 }
@@ -190,6 +191,7 @@ export const DEMO_CAMPAIGNS: CampaignItem[] = [
     image: modernMorningCoffeeImg,
     imageAlt:
       'Mesa clara com café gelado em copo canelado, caderno aberto, óculos de sol e tigela de frutas.',
+    imagePositionClass: 'object-bottom',
   },
   {
     id: 'skincare-bancada',
@@ -202,6 +204,7 @@ export const DEMO_CAMPAIGNS: CampaignItem[] = [
     image: modernSkincareMirrorImg,
     imageAlt:
       'Frasco de sérum fosco, lip balm, presilha tartaruga e argolas douradas na bancada iluminada.',
+    imagePositionClass: 'object-[50%_62%]',
   },
   {
     id: 'cafe-bairro-patio',
@@ -214,6 +217,7 @@ export const DEMO_CAMPAIGNS: CampaignItem[] = [
     image: modernCafeTerraceImg,
     imageAlt:
       'Lívia Martins sorrindo ao usar o celular em mesa de mármore com café gelado e croissant em pátio ensolarado.',
+    imagePositionClass: 'object-top',
   },
   {
     id: 'caminhada-bairro',
@@ -226,6 +230,7 @@ export const DEMO_CAMPAIGNS: CampaignItem[] = [
     image: modernStreetStrollImg,
     imageAlt:
       'Lívia Martins caminhando sorrindo em rua arborizada com camiseta branca, calça de linho e bolsa com flores.',
+    imagePositionClass: 'object-top',
   },
   {
     id: 'fragrancia-quarto',
@@ -238,6 +243,7 @@ export const DEMO_CAMPAIGNS: CampaignItem[] = [
     image: homePerfumeBedroomImg,
     imageAlt:
       'Frasco de perfume sobre madeira natural ao lado de bandeja cerâmica e folhas secas ao sol.',
+    imagePositionClass: 'object-[50%_58%]',
   },
   {
     id: 'fim-de-semana-costa',
@@ -250,6 +256,7 @@ export const DEMO_CAMPAIGNS: CampaignItem[] = [
     image: campaignExperienciasResortImg,
     imageAlt:
       'Terraço claro com cortinas de linho ao vento e vista para o mar ao fim da tarde.',
+    imagePositionClass: 'object-center',
   },
 ];
 
