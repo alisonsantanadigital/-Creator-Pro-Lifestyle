@@ -179,7 +179,7 @@ export function CampaignsSection() {
     <section
       id="vitrine"
       aria-labelledby="vitrine-heading"
-      className="scroll-mt-20 overflow-x-clip bg-[#F5F1E9] py-20 sm:py-24 lg:py-28"
+      className="scroll-mt-20 overflow-x-clip border-t border-[#DCD1C0]/60 bg-transparent py-24 sm:py-28 lg:py-32"
     >
       <div className="mx-auto max-w-[1240px] px-6 sm:px-10">
         {/* Header + Filter Controls */}
@@ -188,7 +188,7 @@ export function CampaignsSection() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, amount: 0.25 }}
           transition={{ duration: 0.55, ease: [0.16, 1, 0.3, 1] }}
-          className="flex flex-col justify-between gap-6 border-b border-[#DCD1C0] pb-8 lg:flex-row lg:items-end"
+          className="flex flex-col justify-between gap-6 border-b border-[#DCD1C0]/75 pb-8 lg:flex-row lg:items-end"
         >
           <div>
             <div className="flex flex-wrap items-center gap-x-2.5 gap-y-1 text-xs font-medium tracking-[0.14em] text-[#9E593F]">
@@ -204,7 +204,7 @@ export function CampaignsSection() {
               id="vitrine-heading"
               className="mt-2.5 max-w-xl font-serif text-3xl leading-[1.12] font-normal tracking-tight text-[#282824] text-balance sm:text-4xl lg:text-[44px]"
             >
-              Exemplos visuais de produção e enquadramento.
+              Produção e enquadramento.
             </h2>
           </div>
 
@@ -288,7 +288,7 @@ export function CampaignsSection() {
               onClick={() => scrollToSlide(activeSlideIndex - 1)}
               disabled={activeSlideIndex === 0}
               aria-label="Conteúdo anterior"
-              className="inline-flex min-h-[44px] min-w-[44px] items-center justify-center border border-[#DCD1C0] bg-[#FAF8F3] text-[#282824] transition-colors duration-150 hover:border-[#39483C] hover:bg-[#EFE9DD] disabled:cursor-not-allowed disabled:opacity-40 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#39483C]"
+              className="inline-flex min-h-[44px] min-w-[44px] items-center justify-center border border-[#DCD1C0]/80 bg-white/90 text-[#282824] shadow-[0_8px_20px_-14px_rgba(40,40,36,0.2)] transition-colors duration-150 hover:border-[#39483C] hover:bg-white disabled:cursor-not-allowed disabled:opacity-40 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#39483C]"
             >
               <ArrowLeft className="h-4 w-4" />
             </button>
@@ -298,7 +298,7 @@ export function CampaignsSection() {
               onClick={() => scrollToSlide(activeSlideIndex + 1)}
               disabled={activeSlideIndex >= filteredCampaigns.length - 1}
               aria-label="Próximo conteúdo"
-              className="inline-flex min-h-[44px] min-w-[44px] items-center justify-center border border-[#DCD1C0] bg-[#FAF8F3] text-[#282824] transition-colors duration-150 hover:border-[#39483C] hover:bg-[#EFE9DD] disabled:cursor-not-allowed disabled:opacity-40 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#39483C]"
+              className="inline-flex min-h-[44px] min-w-[44px] items-center justify-center border border-[#DCD1C0]/80 bg-white/90 text-[#282824] shadow-[0_8px_20px_-14px_rgba(40,40,36,0.2)] transition-colors duration-150 hover:border-[#39483C] hover:bg-white disabled:cursor-not-allowed disabled:opacity-40 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#39483C]"
             >
               <ArrowRight className="h-4 w-4" />
             </button>
@@ -340,7 +340,7 @@ export function CampaignsSection() {
                   type="button"
                   onClick={() => handleOpenLightbox(idx)}
                   aria-label={`Ampliar publicação: ${campaign.title}`}
-                  className="relative block w-full border border-[#DCD1C0] bg-[#ECE5D8] p-2 text-left transition-colors duration-200 group-hover:border-[#39483C]/60 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#39483C]"
+                  className="relative block w-full border border-[#DCD1C0]/80 bg-white/90 p-2 text-left shadow-[0_20px_50px_-26px_rgba(40,40,36,0.14)] ring-1 ring-inset ring-white transition-all duration-200 group-hover:border-[#39483C]/55 group-hover:shadow-[0_26px_60px_-24px_rgba(40,40,36,0.2)] focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#39483C]"
                 >
                   <div className="relative overflow-hidden">
                     {isVideoActive && campaign.videoUrl ? (
@@ -367,14 +367,14 @@ export function CampaignsSection() {
 
                     <span
                       aria-hidden="true"
-                      className="absolute right-3 bottom-3 inline-flex h-9 w-9 items-center justify-center bg-[#F5F1E9]/90 text-[#282824] opacity-0 transition-opacity duration-200 group-hover:opacity-100"
+                      className="absolute right-3 bottom-3 inline-flex h-9 w-9 items-center justify-center bg-white/92 text-[#282824] opacity-0 shadow-sm transition-opacity duration-200 group-hover:opacity-100"
                     >
                       <Maximize2 className="h-3.5 w-3.5" />
                     </span>
                   </div>
                 </button>
 
-                {/* Unboxed Metadata */}
+                {/* Concise Unboxed Metadata */}
                 <div className="mt-4 flex flex-wrap items-center gap-x-2 gap-y-1 text-xs text-[#585850]">
                   <span className="font-medium text-[#9E593F]">
                     {campaign.category}
@@ -382,20 +382,12 @@ export function CampaignsSection() {
                   <span aria-hidden="true" className="text-[#BD765B]">
                     ·
                   </span>
-                  <span>{campaign.demoTag}</span>
+                  <span>{campaign.formatLabel}</span>
                 </div>
 
-                <h3 className="mt-1.5 font-serif text-2xl leading-[1.18] font-normal tracking-tight text-[#282824]">
+                <h3 className="mt-1 font-serif text-2xl leading-[1.18] font-normal tracking-tight text-[#282824]">
                   {campaign.title}
                 </h3>
-
-                <p className="mt-1 text-xs font-medium text-[#39483C]">
-                  {campaign.formatLabel}
-                </p>
-
-                <p className="mt-2 line-clamp-2 max-w-[46ch] text-sm leading-relaxed text-[#4E4E47]">
-                  {campaign.summary}
-                </p>
               </article>
             );
           })}
@@ -430,7 +422,7 @@ export function CampaignsSection() {
               }
               transition={{ duration: 0.24, ease: [0.16, 1, 0.3, 1] }}
               onClick={(e) => e.stopPropagation()}
-              className="relative flex max-h-[92vh] w-full max-w-4xl flex-col overflow-hidden border border-[#A8B2A0]/30 bg-[#F5F1E9] text-[#282824]"
+              className="relative flex max-h-[92vh] w-full max-w-4xl flex-col overflow-hidden border border-[#A8B2A0]/30 bg-white/95 text-[#282824] shadow-2xl"
             >
               {/* Top Lightbox Bar */}
               <div className="flex items-center justify-between gap-4 border-b border-[#DCD1C0] px-5 py-3.5 sm:px-6">

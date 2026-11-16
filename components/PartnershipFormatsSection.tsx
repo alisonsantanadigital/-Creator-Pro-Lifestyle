@@ -61,8 +61,10 @@ function TiltFormatRow({
         onPointerLeave={handlePointerLeave}
         animate={canTilt ? tilt : undefined}
         transition={{ type: 'spring', stiffness: 260, damping: 24, mass: 0.6 }}
-        className={`grid grid-cols-1 gap-4 border-t border-[#DCD1C0] py-7 transition-colors duration-200 sm:grid-cols-12 sm:items-start sm:gap-6 ${
-          isSelected ? 'bg-[#EFE9DD]/65 px-4 sm:px-5' : 'hover:bg-[#EFE9DD]/40 px-2 sm:px-3'
+        className={`grid grid-cols-1 gap-4 border-t border-[#DCD1C0]/75 py-7 transition-all duration-200 sm:grid-cols-12 sm:items-start sm:gap-6 ${
+          isSelected
+            ? 'bg-white/92 px-4 shadow-[0_18px_44px_-24px_rgba(40,40,36,0.14)] sm:px-5'
+            : 'px-2 hover:bg-white/78 hover:shadow-[0_14px_36px_-24px_rgba(40,40,36,0.1)] sm:px-3'
         }`}
       >
         <div className="sm:col-span-1">
@@ -78,10 +80,10 @@ function TiltFormatRow({
           <p className="mt-1 text-xs font-medium text-[#39483C]">
             {format.subtitle}
           </p>
-          <p className="mt-3 text-sm leading-relaxed text-[#4E4E47]">
+          <p className="mt-2.5 text-sm leading-relaxed text-[#4E4E47]">
             {format.description}
           </p>
-          <p className="mt-3 text-xs text-[#616158]">{format.deliverables}</p>
+          <p className="mt-2.5 text-xs text-[#616158]">{format.deliverables}</p>
         </div>
 
         <div className="sm:col-span-4 sm:flex sm:justify-end">
@@ -91,7 +93,7 @@ function TiltFormatRow({
             className={`group inline-flex min-h-[44px] w-full items-center justify-center gap-2 border px-4 py-2.5 text-xs font-medium whitespace-nowrap shrink-0 transition-colors duration-150 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#39483C] sm:w-auto ${
               isSelected
                 ? 'border-[#39483C] bg-[#39483C] text-[#F5F1E9]'
-                : 'border-[#DCD1C0] bg-[#FAF8F3] text-[#282824] hover:border-[#39483C] hover:bg-[#39483C] hover:text-[#F5F1E9]'
+                : 'border-[#DCD1C0]/85 bg-white text-[#282824] hover:border-[#39483C] hover:bg-[#39483C] hover:text-[#F5F1E9]'
             }`}
           >
             <span>
@@ -135,7 +137,7 @@ export function PartnershipFormatsSection({
     <section
       id="formatos"
       aria-labelledby="formatos-heading"
-      className="scroll-mt-20 border-t border-[#DCD1C0] bg-[#F5F1E9] py-20 sm:py-24 lg:py-28"
+      className="scroll-mt-20 border-t border-[#DCD1C0]/70 bg-white/55 py-24 backdrop-blur-[2px] sm:py-28 lg:py-32"
     >
       <div className="mx-auto max-w-[1240px] px-6 sm:px-10">
         <div className="grid grid-cols-1 gap-10 lg:grid-cols-12 lg:gap-16">
@@ -154,18 +156,17 @@ export function PartnershipFormatsSection({
               id="formatos-heading"
               className="mt-3 font-serif text-3xl leading-[1.12] font-normal tracking-tight text-[#282824] text-balance sm:text-4xl"
             >
-              Formatos disponíveis para contratação.
+              Formatos para contratação.
             </h2>
             <div className="mt-5 h-px w-12 bg-[#BD765B]" aria-hidden="true" />
-            <p className="mt-5 max-w-[38ch] text-[15px] leading-[1.7] text-[#4E4E47]">
-              Opções de entrega avulsa ou em pacotes mensais para divulgação de
-              produtos, lançamentos e presença em ações de marca.
+            <p className="mt-5 max-w-[34ch] text-[15px] leading-[1.7] text-[#4E4E47]">
+              Entregas avulsas ou pacotes mensais sob briefing.
             </p>
           </motion.div>
 
           {/* Right Numbered Editorial List with subtle desktop 3D tilt */}
           <div className="lg:col-span-8">
-            <div className="border-b border-[#DCD1C0]">
+            <div className="border-b border-[#DCD1C0]/75">
               {PARTNERSHIP_FORMATS.map((format) => (
                 <TiltFormatRow
                   key={format.number}

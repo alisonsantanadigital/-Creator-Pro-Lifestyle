@@ -35,7 +35,7 @@ export default function RootLayout({
     <html lang="pt-BR" className="scroll-smooth">
       <body
         suppressHydrationWarning
-        className="bg-[#F5F1E9] font-sans text-[#282824] antialiased selection:bg-[#BD765B]/25 selection:text-[#282824]"
+        className="bg-[#FFFFFF] font-sans text-[#282824] antialiased selection:bg-[#BD765B]/20 selection:text-[#282824]"
       >
         {children}
       </body>

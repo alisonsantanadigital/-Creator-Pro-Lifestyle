@@ -73,8 +73,12 @@ export function AudienceInsightsSection() {
     <section
       id="insights"
       aria-labelledby="insights-heading"
-      className="scroll-mt-20 border-y border-[#DCD1C0] bg-[#EFE9DD] py-16 sm:py-20"
+      className="relative scroll-mt-20 border-y border-[#DCD1C0]/70 bg-white/62 py-20 backdrop-blur-[2px] sm:py-24 lg:py-28"
     >
+      <div
+        aria-hidden="true"
+        className="pointer-events-none absolute inset-0 -z-10 bg-[radial-gradient(ellipse_at_top,rgba(245,241,233,0.65)_0%,rgba(255,255,255,0.4)_65%)]"
+      />
       <div className="mx-auto max-w-[1240px] px-6 sm:px-10">
         {/* Header Row */}
         <motion.div
@@ -82,7 +86,7 @@ export function AudienceInsightsSection() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, amount: 0.25 }}
           transition={{ duration: 0.55, ease: [0.16, 1, 0.3, 1] }}
-          className="flex flex-col justify-between gap-4 border-b border-[#DCD1C0] pb-6 md:flex-row md:items-end"
+          className="flex flex-col justify-between gap-4 border-b border-[#DCD1C0]/75 pb-6 md:flex-row md:items-end"
         >
           <div>
             <p className="text-xs font-medium tracking-[0.14em] text-[#9E593F]">
@@ -108,14 +112,22 @@ export function AudienceInsightsSection() {
         </motion.div>
 
         {/* 4-Column Animated Number Counters / Prepared Fields */}
-        <div className="grid grid-cols-1 divide-y divide-[#DCD1C0] sm:grid-cols-2 sm:divide-x sm:divide-y-0 lg:grid-cols-4">
+        <div className="grid grid-cols-1 divide-y divide-[#DCD1C0]/75 sm:grid-cols-2 sm:divide-x sm:divide-y-0 lg:grid-cols-4">
           {AUDIENCE_INSIGHTS.metrics.map((metric, index) => (
-            <div
+            <motion.div
               key={metric.id}
-              className={`py-8 sm:px-6 lg:py-10 ${
+              initial={prefersReducedMotion ? false : { opacity: 0, y: 14 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, amount: 0.25 }}
+              transition={{
+                duration: 0.5,
+                delay: index * 0.06,
+                ease: [0.16, 1, 0.3, 1],
+              }}
+              className={`py-9 sm:px-6 lg:py-11 ${
                 index === 0 ? 'sm:pl-0' : ''
               } ${index === AUDIENCE_INSIGHTS.metrics.length - 1 ? 'lg:pr-0' : ''} ${
-                index >= 2 ? 'sm:border-t sm:border-[#DCD1C0] lg:border-t-0' : ''
+                index >= 2 ? 'sm:border-t sm:border-[#DCD1C0]/75 lg:border-t-0' : ''
               }`}
             >
               <p className="text-xs font-medium text-[#4E4E47]">{metric.label}</p>
@@ -123,15 +135,15 @@ export function AudienceInsightsSection() {
                 <AnimatedMetricNumber metric={metric} />
               </p>
               <div className="mt-4 h-px w-8 bg-[#BD765B]" aria-hidden="true" />
-              <p className="mt-3 text-sm leading-relaxed text-[#4E4E47]">
+              <p className="mt-3 text-sm leading-relaxed text-[#585850]">
                 {metric.context}
               </p>
-            </div>
+            </motion.div>
           ))}
         </div>
 
         {/* Demographic Distributions (Prepared for real data; animates when items exist) */}
-        <div className="border-t border-[#DCD1C0] pt-8 pb-6">
+        <div className="border-t border-[#DCD1C0]/75 pt-9">
           <p className="text-xs font-medium tracking-[0.12em] text-[#39483C]">
             {AUDIENCE_INSIGHTS.distributionsTitle}
           </p>
@@ -156,7 +168,7 @@ export function AudienceInsightsSection() {
                           </span>
                         </div>
 
-                        <div className="mt-1.5 h-1.5 w-full overflow-hidden bg-[#DCD1C0]">
+                        <div className="mt-1.5 h-1.5 w-full overflow-hidden bg-[#DCD1C0]/75">
                           <motion.div
                             initial={
                               prefersReducedMotion
@@ -184,7 +196,7 @@ export function AudienceInsightsSection() {
                   </div>
                 ) : (
                   <div className="mt-4 space-y-2.5">
-                    <div className="h-1.5 w-full bg-[#DCD1C0]" aria-hidden="true" />
+                    <div className="h-1.5 w-full bg-[#DCD1C0]/60" aria-hidden="true" />
                     <p className="text-xs leading-relaxed text-[#585850]">
                       {group.emptyNotice}
                     </p>
@@ -194,11 +206,6 @@ export function AudienceInsightsSection() {
             ))}
           </div>
         </div>
-
-        {/* Transparency Line */}
-        <p className="border-t border-[#DCD1C0] pt-5 text-xs text-[#585850]">
-          {AUDIENCE_INSIGHTS.sectionSubtitle}
-        </p>
       </div>
     </section>
   );

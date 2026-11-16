@@ -90,7 +90,7 @@ export function CommercialContactSection({
     <footer
       id="contato"
       aria-labelledby="contato-heading"
-      className="scroll-mt-20 border-t border-[#DCD1C0] bg-[#DCD1C0]/45 pt-20 pb-24 sm:pt-24 sm:pb-12"
+      className="scroll-mt-20 border-t border-[#DCD1C0]/75 bg-gradient-to-b from-[#F5F1E9]/35 via-white/80 to-white pt-24 pb-28 sm:pt-28 sm:pb-14"
     >
       <div className="mx-auto max-w-[1240px] px-6 sm:px-10">
         <motion.div
@@ -172,7 +172,7 @@ export function CommercialContactSection({
               <button
                 type="button"
                 onClick={handleWhatsappDemo}
-                className="group flex min-h-[60px] w-full items-center justify-between gap-4 border border-[#39483C] bg-[#39483C] px-6 py-4 text-left text-[#F5F1E9] transition-colors duration-150 hover:border-[#BD765B] hover:bg-[#2F3C32] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#39483C] active:scale-[0.99]"
+                className="group flex min-h-[60px] w-full items-center justify-between gap-4 border border-[#39483C] bg-[#39483C] px-6 py-4 text-left text-[#F5F1E9] shadow-[0_18px_40px_-24px_rgba(57,72,60,0.45)] transition-all duration-150 hover:border-[#BD765B] hover:bg-[#2F3C32] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#39483C] active:scale-[0.99]"
               >
                 <div className="flex min-w-0 items-center gap-3.5">
                   <MessageCircle className="h-4 w-4 shrink-0 text-[#DCD1C0]" />
@@ -192,7 +192,7 @@ export function CommercialContactSection({
               <button
                 type="button"
                 onClick={handleCopyEmailDemo}
-                className="group flex min-h-[60px] w-full items-center justify-between gap-4 border border-[#DCD1C0] bg-[#F5F1E9] px-6 py-4 text-left transition-colors duration-150 hover:border-[#39483C] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#39483C] active:scale-[0.99]"
+                className="group flex min-h-[60px] w-full items-center justify-between gap-4 border border-[#DCD1C0]/85 bg-white/92 px-6 py-4 text-left shadow-[0_14px_38px_-24px_rgba(40,40,36,0.12)] transition-all duration-150 hover:border-[#39483C] hover:bg-white hover:shadow-[0_18px_42px_-22px_rgba(40,40,36,0.16)] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#39483C] active:scale-[0.99]"
               >
                 <div className="flex min-w-0 items-center gap-3.5">
                   <Mail className="h-4 w-4 shrink-0 text-[#BD765B]" />
@@ -224,7 +224,7 @@ export function CommercialContactSection({
               <button
                 type="button"
                 onClick={handleInstagramDemo}
-                className="group flex min-h-[60px] w-full items-center justify-between gap-4 border border-[#DCD1C0] bg-[#F5F1E9] px-6 py-4 text-left transition-colors duration-150 hover:border-[#39483C] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#39483C] active:scale-[0.99]"
+                className="group flex min-h-[60px] w-full items-center justify-between gap-4 border border-[#DCD1C0]/85 bg-white/92 px-6 py-4 text-left shadow-[0_14px_38px_-24px_rgba(40,40,36,0.12)] transition-all duration-150 hover:border-[#39483C] hover:bg-white hover:shadow-[0_18px_42px_-22px_rgba(40,40,36,0.16)] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#39483C] active:scale-[0.99]"
               >
                 <div className="flex min-w-0 items-center gap-3.5">
                   <Instagram className="h-4 w-4 shrink-0 text-[#BD765B]" />
@@ -244,7 +244,7 @@ export function CommercialContactSection({
             {/* Inline Demonstrative Feedback */}
             <div aria-live="polite" className="mt-4 min-h-[44px]">
               {contactFeedback ? (
-                <div className="border border-[#BD765B]/55 bg-[#F5F1E9] px-4 py-3 text-xs leading-relaxed text-[#282824]">
+                <div className="border border-[#BD765B]/55 bg-white/95 px-4 py-3 text-xs leading-relaxed text-[#282824] shadow-sm">
                   {contactFeedback}
                 </div>
               ) : (
@@ -257,7 +257,7 @@ export function CommercialContactSection({
         </motion.div>
 
         {/* Quiet Editorial Footer Base */}
-        <div className="mt-16 flex flex-col justify-between gap-4 border-t border-[#DCD1C0] pt-7 text-xs text-[#4E4E47] sm:flex-row sm:items-center">
+        <div className="mt-20 flex flex-col justify-between gap-4 border-t border-[#DCD1C0]/75 pt-7 text-xs text-[#4E4E47] sm:flex-row sm:items-center">
           <div className="flex flex-wrap items-center gap-x-2.5 gap-y-1">
             <span className="font-medium text-[#282824]">
               {CREATOR_PROFILE.name}

@@ -3,6 +3,7 @@
 import { MotionConfig } from 'motion/react';
 import { useState } from 'react';
 import { AboutSection } from '@/components/AboutSection';
+import { AmbientBackground } from '@/components/AmbientBackground';
 import { AudienceInsightsSection } from '@/components/AudienceInsightsSection';
 import { BrandsMarqueeSection } from '@/components/BrandsMarqueeSection';
 import { CampaignsSection } from '@/components/CampaignsSection';
@@ -17,24 +18,27 @@ export function CreatorProShowcase() {
 
   return (
     <MotionConfig reducedMotion="user">
-      <div className="min-h-screen bg-[#F5F1E9] text-[#282824]">
-        <TopBar />
-        <main>
-          <HeroSection />
-          <AudienceInsightsSection />
-          <AboutSection />
-          <CampaignsSection />
-          <PartnershipFormatsSection
+      <div className="relative min-h-screen text-[#282824]">
+        <AmbientBackground />
+        <div className="relative z-10">
+          <TopBar />
+          <main>
+            <HeroSection />
+            <AudienceInsightsSection />
+            <AboutSection />
+            <CampaignsSection />
+            <PartnershipFormatsSection
+              selectedFormat={selectedFormat}
+              onSelectFormat={(formatTitle) => setSelectedFormat(formatTitle)}
+            />
+            <BrandsMarqueeSection />
+          </main>
+          <CommercialContactSection
             selectedFormat={selectedFormat}
-            onSelectFormat={(formatTitle) => setSelectedFormat(formatTitle)}
+            onClearFormat={() => setSelectedFormat(null)}
           />
-          <BrandsMarqueeSection />
-        </main>
-        <CommercialContactSection
-          selectedFormat={selectedFormat}
-          onClearFormat={() => setSelectedFormat(null)}
-        />
-        <MobileStickyBar />
+          <MobileStickyBar />
+        </div>
       </div>
     </MotionConfig>
   );

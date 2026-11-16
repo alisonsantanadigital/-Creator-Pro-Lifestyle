@@ -12,7 +12,7 @@ export function BrandsMarqueeSection() {
     <section
       id="marcas"
       aria-labelledby="marcas-heading"
-      className="scroll-mt-20 overflow-hidden border-t border-[#DCD1C0] bg-[#EFE9DD] py-16 sm:py-20"
+      className="scroll-mt-20 overflow-hidden border-t border-[#DCD1C0]/70 bg-[#F5F1E9]/35 py-20 sm:py-24"
     >
       <div className="mx-auto max-w-[1240px] px-6 sm:px-10">
         <motion.div
@@ -43,14 +43,14 @@ export function BrandsMarqueeSection() {
       </div>
 
       {/* Infinite Editorial Marquee */}
-      <div className="group/marquee relative mt-10 border-y border-[#DCD1C0] bg-[#F5F1E9]/65 py-6">
+      <div className="group/marquee relative mt-10 border-y border-[#DCD1C0]/75 bg-white/75 py-6">
         <div
           aria-hidden="true"
-          className="pointer-events-none absolute inset-y-0 left-0 z-10 w-12 bg-gradient-to-r from-[#EFE9DD] to-transparent sm:w-20"
+          className="pointer-events-none absolute inset-y-0 left-0 z-10 w-12 bg-gradient-to-r from-white/95 to-transparent sm:w-20"
         />
         <div
           aria-hidden="true"
-          className="pointer-events-none absolute inset-y-0 right-0 z-10 w-12 bg-gradient-to-l from-[#EFE9DD] to-transparent sm:w-20"
+          className="pointer-events-none absolute inset-y-0 right-0 z-10 w-12 bg-gradient-to-l from-white/95 to-transparent sm:w-20"
         />
 
         {hasVerifiedBrands ? (
@@ -84,7 +84,7 @@ export function BrandsMarqueeSection() {
               (slotLabel, idx) => (
                 <div
                   key={`${slotLabel}-${idx}`}
-                  className="flex min-h-[56px] min-w-[260px] items-center justify-center border border-dashed border-[#A8B2A0] bg-[#F5F1E9]/70 px-6 py-3 grayscale transition-all duration-300 hover:border-[#BD765B] hover:grayscale-0"
+                  className="flex min-h-[56px] min-w-[260px] items-center justify-center border border-dashed border-[#A8B2A0]/80 bg-white/90 px-6 py-3 shadow-[0_10px_28px_-20px_rgba(40,40,36,0.12)] grayscale transition-all duration-300 hover:border-[#BD765B] hover:grayscale-0"
                 >
                   <span className="text-xs font-medium tracking-wide text-[#4E4E47] transition-colors duration-300 hover:text-[#39483C]">
                     {slotLabel}

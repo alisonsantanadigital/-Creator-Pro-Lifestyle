@@ -47,11 +47,11 @@ export function HeroSection() {
     <section
       id="topo"
       ref={sectionRef}
-      className="relative scroll-mt-20 overflow-x-clip pt-6 pb-14 sm:pt-10 sm:pb-20 lg:pt-12 lg:pb-24"
+      className="relative scroll-mt-20 overflow-x-clip pt-8 pb-16 sm:pt-12 sm:pb-24 lg:pt-14 lg:pb-28"
     >
       <div className="mx-auto max-w-[1240px] px-6 sm:px-10">
         {/* Top Editorial Margin Strip */}
-        <div className="mb-7 flex flex-wrap items-center justify-between gap-3 border-b border-[#DCD1C0] pb-4 text-xs text-[#39483C]">
+        <div className="mb-8 flex flex-wrap items-center justify-between gap-3 border-b border-[#DCD1C0]/75 pb-4 text-xs text-[#39483C]">
           <motion.div
             animate={
               prefersReducedMotion
@@ -70,7 +70,7 @@ export function HeroSection() {
           </div>
         </div>
 
-        <div className="grid grid-cols-1 items-stretch gap-10 lg:grid-cols-12 lg:gap-12">
+        <div className="grid grid-cols-1 items-stretch gap-12 lg:grid-cols-12 lg:gap-14">
           {/* Left Column: Staggered Editorial Reveal */}
           <div className="flex flex-col justify-between lg:col-span-6 lg:py-4">
             <div className="my-4 lg:my-auto lg:py-6">
@@ -84,7 +84,7 @@ export function HeroSection() {
               </motion.p>
 
               {/* Staggered Word-by-Word Vertical Name Reveal */}
-              <h1 className="mt-4 font-serif text-[clamp(3.15rem,6.6vw,5.5rem)] leading-[0.94] font-normal tracking-[-0.025em] text-[#282824] text-balance">
+              <h1 className="mt-4 font-serif text-[clamp(3.25rem,6.6vw,5.6rem)] leading-[0.94] font-normal tracking-[-0.025em] text-[#282824] text-balance">
                 {nameWords.map((word, index) => (
                   <span
                     key={word}
@@ -131,7 +131,7 @@ export function HeroSection() {
                 initial={prefersReducedMotion ? false : { opacity: 0, y: 14 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.55, delay: 0.36, ease: [0.16, 1, 0.3, 1] }}
-                className="mt-4 max-w-[46ch] text-[15px] leading-[1.7] text-[#4E4E47]"
+                className="mt-3 max-w-[42ch] text-[15px] leading-[1.7] text-[#4E4E47]"
               >
                 {CREATOR_PROFILE.introSummary}
               </motion.p>
@@ -141,7 +141,7 @@ export function HeroSection() {
                 initial={prefersReducedMotion ? false : { opacity: 0, y: 14 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.55, delay: 0.44, ease: [0.16, 1, 0.3, 1] }}
-                className="mt-9 flex flex-wrap items-center gap-5"
+                className="mt-10 flex flex-wrap items-center gap-5"
               >
                 <MagneticCtaButton
                   href="#contato"
@@ -155,7 +155,7 @@ export function HeroSection() {
             </div>
 
             {/* Bottom Discrete Social Links */}
-            <div className="border-t border-[#DCD1C0] pt-5">
+            <div className="border-t border-[#DCD1C0]/75 pt-5">
               <div className="flex flex-wrap items-center gap-x-5 gap-y-1 text-sm text-[#4E4E47]">
                 <button
                   type="button"
@@ -196,14 +196,18 @@ export function HeroSection() {
             </div>
           </div>
 
-          {/* Right Column: Cinematic Protagonist Photography with Parallax */}
+          {/* Right Column: Luminous Gallery Frame with Subtle Depth & Parallax */}
           <div className="relative lg:col-span-6">
+            <div
+              aria-hidden="true"
+              className="pointer-events-none absolute -inset-6 -z-10 rounded-[48%_52%_44%_56%/54%_46%_54%_46%] bg-[radial-gradient(circle,rgba(245,241,233,0.9)_0%,rgba(220,209,192,0.3)_55%,transparent_75%)] blur-2xl"
+            />
             <motion.div
               style={prefersReducedMotion ? undefined : { y: portraitParallaxY }}
               initial={prefersReducedMotion ? false : { opacity: 0.85, scale: 0.985 }}
               animate={{ opacity: 1, scale: 1 }}
               transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
-              className="relative h-full border border-[#DCD1C0] bg-[#ECE5D8] p-2.5 sm:p-3.5"
+              className="relative h-full border border-[#DCD1C0]/80 bg-white/88 p-2.5 shadow-[0_28px_68px_-30px_rgba(40,40,36,0.14)] ring-1 ring-inset ring-white sm:p-4"
             >
               {HERO_MEDIA.videoUrl ? (
                 <div className="relative aspect-[3/4] overflow-hidden lg:aspect-auto lg:h-full lg:min-h-[620px]">
@@ -217,7 +221,7 @@ export function HeroSection() {
                   />
                   <div
                     aria-hidden="true"
-                    className="pointer-events-none absolute inset-0 bg-gradient-to-t from-[#282824]/30 via-transparent to-transparent"
+                    className="pointer-events-none absolute inset-0 bg-gradient-to-t from-[#282824]/25 via-transparent to-transparent"
                   />
                 </div>
               ) : (
@@ -237,7 +241,7 @@ export function HeroSection() {
                 style={prefersReducedMotion ? undefined : { y: floatingParallaxY }}
                 className="mt-3 flex flex-wrap items-center justify-between gap-2 px-1 pb-0.5 text-xs text-[#585850]"
               >
-                <span>{CREATOR_PROFILE.name} · {CREATOR_PROFILE.role}</span>
+                <span>{CREATOR_PROFILE.name}</span>
                 <span className="font-medium text-[#39483C]">
                   {CREATOR_PROFILE.brandHouse} · {CREATOR_PROFILE.productName}
                 </span>
