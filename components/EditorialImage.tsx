@@ -29,12 +29,12 @@ export function EditorialImage({
       <div
         role="img"
         aria-label={alt}
-        className={`relative flex w-full items-center justify-center overflow-hidden bg-[#EFE8DC] text-center ${aspectClassName} ${className}`}
+        className={`relative flex w-full items-center justify-center overflow-hidden bg-[#ECE5D8] text-center ${aspectClassName} ${className}`}
       >
         <div className="px-6 py-8">
-          <p className="font-serif text-lg text-[#4A4640]">{fallbackTitle}</p>
-          <p className="mt-1 text-xs text-[#6E675E]">
-            Acervo visual Creator Pro · Prumo Creators
+          <p className="font-serif text-lg text-[#282824]">{fallbackTitle}</p>
+          <p className="mt-1 text-xs text-[#39483C]">
+            Acervo visual · {alt ? 'Lívia Martins' : 'Creator Pro'}
           </p>
         </div>
       </div>
@@ -42,7 +42,7 @@ export function EditorialImage({
   }
 
   return (
-    <div className={`relative overflow-hidden bg-[#EFE8DC] ${aspectClassName}`}>
+    <div className={`relative overflow-hidden bg-[#ECE5D8] ${aspectClassName}`}>
       <Image
         src={src}
         alt={alt}

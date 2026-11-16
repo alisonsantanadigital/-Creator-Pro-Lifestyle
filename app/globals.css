@@ -6,8 +6,37 @@
   --font-sans: "Plus Jakarta Sans", system-ui, -apple-system, sans-serif;
 }
 
+@keyframes marquee-slide {
+  0% {
+    transform: translate3d(0, 0, 0);
+  }
+  100% {
+    transform: translate3d(-50%, 0, 0);
+  }
+}
+
+.animate-marquee {
+  animation: marquee-slide 34s linear infinite;
+}
+
+.group\/marquee:hover .animate-marquee {
+  animation-play-state: paused;
+}
+
+/* Hide scrollbars cleanly inside horizontal editorial drag track */
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
 @media (prefers-reduced-motion: reduce) {
   html {
     scroll-behavior: auto;
+  }
+  .animate-marquee {
+    animation: none;
   }
 }

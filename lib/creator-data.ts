@@ -6,32 +6,48 @@ import campaignBelezaBotanicaImg from '@/src/assets/images/campaign_beleza_botan
 import campaignLifestyleCasaImg from '@/src/assets/images/campaign_lifestyle_casa_1794751049328.jpg';
 import campaignExperienciasResortImg from '@/src/assets/images/campaign_experiencias_resort_1794751050101.jpg';
 import campaignBelezaFragranciaImg from '@/src/assets/images/campaign_beleza_fragrancia_1794751049527.jpg';
+import editorialTerracottaRitualImg from '@/src/assets/images/editorial_terracotta_ritual_1794803047335.jpg';
+import editorialOlivePatioImg from '@/src/assets/images/editorial_olive_patio_1794803047706.jpg';
 
 export type CampaignCategory = 'Todas' | 'Beleza' | 'Lifestyle' | 'Experiências';
+
+export type EditorialAspect = 'portrait' | 'landscape' | 'wide';
 
 export interface AudienceMetric {
   id: string;
   label: string;
-  value: string;
+  /** Leave null when no real metric is available yet; renders prepared state instead of fake numbers. */
+  numericTarget: number | null;
+  suffix?: string;
+  decimals?: number;
+  thousandSeparator?: boolean;
+  displayFallback: string;
   context: string;
 }
 
-export interface AudienceProfileAttribute {
-  label: string;
-  value: string;
+export interface AudienceDistributionGroup {
+  id: string;
+  title: string;
+  emptyNotice: string;
+  /** Populate with real platform demographic splits when available. Leave empty if unconfirmed. */
+  items: {
+    label: string;
+    percentage: number;
+  }[];
 }
 
 export interface CampaignItem {
   id: string;
   title: string;
-  conceptBrand: string;
+  formatLabel: string;
   category: Exclude<CampaignCategory, 'Todas'>;
-  deliverable: string;
   summary: string;
   demoTag: string;
+  aspect: EditorialAspect;
   image: StaticImageData;
   imageAlt: string;
-  featured?: boolean;
+  /** Optional real video URL when available. Leave undefined when only photography exists. */
+  videoUrl?: string;
 }
 
 export interface PartnershipFormat {
@@ -42,83 +58,121 @@ export interface PartnershipFormat {
   deliverables: string;
 }
 
+export interface BrandPartner {
+  id: string;
+  name: string;
+  segment: string;
+  logoSrc?: string;
+}
+
 export const CREATOR_PROFILE = {
   productName: 'Creator Pro',
   brandHouse: 'Prumo Creators',
   name: 'Lívia Martins',
   role: 'Criadora de conteúdo digital',
   segments: 'Lifestyle, beleza e experiências',
-  tagline: 'Conectando marcas a experiências autênticas.',
-  heroCta: 'Vamos construir uma parceria?',
+  positioning:
+    'Produção de conteúdo em lifestyle, beleza e experiências para marcas.',
+  introSummary:
+    'Apresentação comercial com foco em rotinas reais, demonstração de produtos e cobertura de experiências para Instagram, TikTok e ações presenciais.',
+  primaryCta: 'Vamos criar algo juntas?',
+  headerMetaLeft: 'Media Kit · Demonstração Creator Pro',
+  headerMetaRight: 'Lifestyle · Beleza · Experiências',
   instagramHandle: '@liviamartins.demo',
   tiktokHandle: '@liviamartins.demo',
   isDemo: true,
 } as const;
 
+export const HERO_MEDIA: {
+  image: StaticImageData;
+  imageAlt: string;
+  videoUrl?: string;
+} = {
+  image: heroLiviaImg,
+  imageAlt:
+    'Retrato de Lívia Martins em blazer de linho claro sob iluminação natural.',
+  videoUrl: undefined,
+};
+
 export const AUDIENCE_INSIGHTS = {
-  sectionTitle: 'Audience Insights',
+  sectionKicker: 'Audiência',
+  sectionTitle: 'Números e dados do público',
   sectionSubtitle:
-    'Indicadores consolidados para planejamento de mídia e avaliação de aderência.',
+    'Seguidores ilustrativos da demonstração e campos preparados para inclusão de alcance, visualizações e demografia reais.',
   updatedAt: 'Atualizado em novembro de 2026',
-  disclaimer: 'Dados demonstrativos · Perfil ilustrativo Creator Pro',
+  disclaimer: 'Perfil demonstrativo · Campos sem dados reais permanecem abertos',
   metrics: [
     {
       id: 'instagram',
       label: 'Seguidores no Instagram',
-      value: '85.000',
-      context: 'Comunidade ativa em beleza e estilo de vida',
+      numericTarget: 85000,
+      thousandSeparator: true,
+      displayFallback: '85.000',
+      context: 'Dado demonstrativo de perfil',
     },
     {
       id: 'tiktok',
       label: 'Seguidores no TikTok',
-      value: '42.000',
-      context: 'Narrativas visuais e rotinas em vídeo curto',
+      numericTarget: 42000,
+      thousandSeparator: true,
+      displayFallback: '42.000',
+      context: 'Dado demonstrativo de perfil',
     },
     {
       id: 'reach',
-      label: 'Alcance médio mensal',
-      value: '185 mil',
-      context: 'Contas únicas alcançadas entre formatos orgânicos',
+      label: 'Alcance médio',
+      numericTarget: null,
+      displayFallback: 'A atualizar',
+      context: 'Preparado para dados reais de alcance',
     },
     {
-      id: 'engagement',
-      label: 'Taxa de engajamento',
-      value: '4,8%',
-      context: 'Média ponderada por interações e salvamentos',
+      id: 'views',
+      label: 'Visualizações médias',
+      numericTarget: null,
+      displayFallback: 'A atualizar',
+      context: 'Preparado para média real de Reels e TikTok',
     },
   ] satisfies AudienceMetric[],
-  audienceProfileTitle: 'Perfil da audiência (demonstrativo)',
-  audienceProfile: [
-    { label: 'Público predominante', value: 'Feminino · 78%' },
-    { label: 'Faixa etária principal', value: '24 a 38 anos' },
-    { label: 'Localização concentrada', value: 'Sudeste e Sul · Capitais' },
-    { label: 'Interesses-chave', value: 'Skincare, bem-estar, casa e viagens' },
-  ] satisfies AudienceProfileAttribute[],
+  distributionsTitle: 'Dados demográficos (preparado para informações reais)',
+  distributions: [
+    {
+      id: 'gender',
+      title: 'Distribuição de gênero',
+      emptyNotice: 'Aguardando dados reais do Instagram e TikTok.',
+      items: [],
+    },
+    {
+      id: 'age',
+      title: 'Faixas etárias',
+      emptyNotice: 'Aguardando recorte etário oficial da audiência.',
+      items: [],
+    },
+    {
+      id: 'location',
+      title: 'Localização da audiência',
+      emptyNotice: 'Aguardando principais cidades e estados.',
+      items: [],
+    },
+  ] as AudienceDistributionGroup[],
 };
 
 export const ABOUT_SECTION = {
-  kicker: 'Sobre a criadora',
-  headline: 'Estética editorial aplicada a histórias reais de consumo e estilo de vida.',
+  kicker: 'Conteúdo',
+  headline: 'Categorias, temas e formatos de publicação.',
   paragraphs: [
-    'Lívia Martins traduz o cotidiano contemporâneo com olhar curatorial para beleza consciente, design de rotina e hospitalidade autoral. Sua produção combina direção de arte serena, luz natural e uma relação de confiança construída com uma audiência atenta a qualidade e procedência.',
-    'Em projetos comerciais, atua lado a lado com equipes de marca e agências desde o desdobramento criativo até a entrega final, garantindo coerência visual entre o universo da anunciante e a linguagem orgânica que sustenta sua comunidade.',
+    'Lívia Martins produz conteúdo digital voltado para lifestyle, beleza e experiências, combinando fotografias e vídeos verticais em linguagem natural e contemporânea.',
+    'As publicações integram produtos e vivências de marca à rotina cotidiana, facilitando a apresentação prática de benefícios para quem acompanha seus canais.',
   ],
   image: aboutLiviaImg,
   imageAlt:
-    'Lívia Martins em ambiente de estúdio iluminado por luz natural, sentada à mesa de travertino com caderno editorial e xícara de cerâmica.',
-  imageCaptionLeft: 'Direção criativa e rotina editorial',
-  imageCaptionRight: 'Acervo demonstrativo',
-  credentials: [
-    { label: 'Base editorial', value: 'São Paulo · Atuação nacional' },
-    { label: 'Territórios de conteúdo', value: 'Lifestyle, Beleza e Experiências' },
-    { label: 'Formato de entrega', value: 'Produção autoral sob briefing' },
+    'Lívia Martins sentada à mesa com caderno de anotações e xícara de cerâmica em ambiente com luz natural.',
+  imageCaptionLeft: 'Produção de conteúdo e rotina',
+  imageCaptionRight: 'Fotografia ilustrativa',
+  pillars: [
+    { label: 'Categorias principais', value: 'Lifestyle · Beleza · Experiências' },
+    { label: 'Temas abordados', value: 'Rotina, cuidados pessoais e vivências' },
+    { label: 'Formatos publicados', value: 'Stories, Reels e TikTok' },
   ],
-} as const;
-
-export const HERO_MEDIA = {
-  image: heroLiviaImg,
-  imageAlt:
-    'Retrato editorial de Lívia Martins em blazer de linho marfim sob luz natural dourada de janela.',
 } as const;
 
 export const CAMPAIGN_CATEGORIES: CampaignCategory[] = [
@@ -130,57 +184,82 @@ export const CAMPAIGN_CATEGORIES: CampaignCategory[] = [
 
 export const DEMO_CAMPAIGNS: CampaignItem[] = [
   {
-    id: 'atelier-botanique',
-    title: 'Ritual Botânico de Inverno',
-    conceptBrand: 'Atelier Botanique (Conceito)',
-    category: 'Beleza',
-    deliverable: 'Reels editorial + Sequência de Stories',
+    id: 'terracotta-ritual',
+    title: 'Rotina matinal e objetos de mesa',
+    formatLabel: 'Fotografia · Conteúdo para Feed',
+    category: 'Lifestyle',
     summary:
-      'Direção criativa e narrativa sensorial destacando textura, aplicação noturna e rotina minimalista de autocuidado.',
-    demoTag: 'Campanha demonstrativa',
+      'Registro de itens pessoais em iluminação natural, exemplo de composição para marcas de casa e papelaria.',
+    demoTag: 'Exemplo ilustrativo',
+    aspect: 'portrait',
+    image: editorialTerracottaRitualImg,
+    imageAlt:
+      'Vaso de terracota com ramos de oliveira, caderno aberto e óculos sobre pedra travertino.',
+  },
+  {
+    id: 'atelier-botanique',
+    title: 'Apresentação de produtos de skincare',
+    formatLabel: 'Stills de produto · Stories',
+    category: 'Beleza',
+    summary:
+      'Enquadramento limpo para destaque de embalagens, texturas e linha de cuidados com a pele.',
+    demoTag: 'Exemplo ilustrativo',
+    aspect: 'landscape',
     image: campaignBelezaBotanicaImg,
     imageAlt:
-      'Frasco de sérum facial em vidro fosco e pote cerâmico sobre pedra travertino sob luz suave matinal.',
-    featured: true,
+      'Frasco de sérum facial em vidro fosco e pote cerâmico sobre pedra travertino.',
+  },
+  {
+    id: 'patio-oliveiras',
+    title: 'Ambiente externo e hospedagem',
+    formatLabel: 'Fotografia panorâmica · Diário de viagem',
+    category: 'Experiências',
+    summary:
+      'Exemplo de cobertura visual para hotéis, espaços arquitetônicos e roteiros ao ar livre.',
+    demoTag: 'Exemplo ilustrativo',
+    aspect: 'wide',
+    image: editorialOlivePatioImg,
+    imageAlt:
+      'Pátio ensolarado com paredes claras, oliveiras em vasos de terracota e espreguiçadeira de linho.',
   },
   {
     id: 'casa-nomade',
-    title: 'Manhãs de Pausa & Design',
-    conceptBrand: 'Casa Nômade (Conceito)',
+    title: 'Mesa posta e momento de pausa',
+    formatLabel: 'Fotografia · Publicação para Feed',
     category: 'Lifestyle',
-    deliverable: 'Combo TikTok + Galeria Instagram',
     summary:
-      'Integração orgânica de mesa posta, objetos autorais e rituais de leitura em ambiente residencial de luz natural.',
-    demoTag: 'Campanha demonstrativa',
+      'Ambientação residencial para marcas de café, decoração, livros e objetos de uso diário.',
+    demoTag: 'Exemplo ilustrativo',
+    aspect: 'portrait',
     image: campaignLifestyleCasaImg,
     imageAlt:
-      'Livro de arte aberto sobre mesa de carvalho claro ao lado de xícara artesanal e vaso cerâmico.',
+      'Livro aberto sobre mesa de madeira clara ao lado de xícara de café e vaso cerâmico.',
   },
   {
     id: 'villa-serena',
-    title: 'Temporada de Hospitalidade Silenciosa',
-    conceptBrand: 'Villa Serena (Conceito)',
+    title: 'Cobertura de destino e vista costeira',
+    formatLabel: 'Registro de viagem · Stories e Reels',
     category: 'Experiências',
-    deliverable: 'Cobertura de estada + Reels cinematográfico',
     summary:
-      'Diário visual de destino boutique com foco em arquitetura, gastronomia local e atmosfera acolhedora.',
-    demoTag: 'Campanha demonstrativa',
+      'Apresentação de espaços de lazer e estada com foco em ambiente e experiência do visitante.',
+    demoTag: 'Exemplo ilustrativo',
+    aspect: 'landscape',
     image: campaignExperienciasResortImg,
     imageAlt:
-      'Terraço de pedra clara com cortinas de linho off-white e vista serena para o mar ao entardecer.',
+      'Terraço de pedra clara com cortinas de linho e vista para o mar ao entardecer.',
   },
   {
     id: 'maison-aurea',
-    title: 'Essência em Luz Dourada',
-    conceptBrand: 'Maison Auréa (Conceito)',
+    title: 'Fotografia de fragrância e beleza',
+    formatLabel: 'Still de lançamento · Feed',
     category: 'Beleza',
-    deliverable: 'Lançamento em Reels + Stills de produto',
     summary:
-      'Ensaio editorial em seda crua e luz direcional para posicionamento premium de nova assinatura olfativa.',
-    demoTag: 'Campanha demonstrativa',
+      'Composição de produto para lançamentos de perfumaria e cosméticos com iluminação direcional.',
+    demoTag: 'Exemplo ilustrativo',
+    aspect: 'landscape',
     image: campaignBelezaFragranciaImg,
     imageAlt:
-      'Frasco minimalista de perfume em vidro transparente com tampa dourada fosca sobre tecido de seda marfim.',
+      'Frasco minimalista de perfume em vidro transparente sobre tecido de seda claro.',
   },
 ];
 
@@ -188,73 +267,83 @@ export const PARTNERSHIP_FORMATS: PartnershipFormat[] = [
   {
     number: '01',
     title: 'Instagram Stories',
-    subtitle: 'Narrativa cotidiana e conversão direta',
+    subtitle: 'Publicação sequencial com link direto',
     description:
-      'Sequências planejadas de 4 a 6 telas com demonstração natural de uso, contextualização de benefícios e direcionamento objetivo para o link da campanha.',
-    deliverables: 'Roteiro aprovado · Aplicação real · Métricas pós-campanha',
+      'Sequência de telas para apresentar o produto, mostrar o uso na prática e direcionar a audiência para o site ou página da campanha.',
+    deliverables: 'Alinhamento de pauta · Demonstração em vídeo ou foto · Link externo',
   },
   {
     number: '02',
     title: 'Reels',
-    subtitle: 'Produção audiovisual de assinatura editorial',
+    subtitle: 'Vídeo vertical para apresentação de produto',
     description:
-      'Vídeos verticais de alta definição com direção de arte alinhada à identidade da marca, ritmo elegante e foco em descoberta e salvamentos.',
-    deliverables: 'Captação 4K · Edição autoral · Opção de impulsionamento (Whitelisting)',
+      'Produção de vídeo curto para o Instagram com foco em apresentação visual clara, contexto de uso e alcance orgânico.',
+    deliverables: 'Roteiro aprovado · Gravação e edição · Publicação em collab opcional',
   },
   {
     number: '03',
     title: 'TikTok',
-    subtitle: 'Storytelling ágil e proximidade de comunidade',
+    subtitle: 'Vídeo curto em linguagem nativa da plataforma',
     description:
-      'Conteúdo nativo que aproxima produtos de beleza, casa e experiências de uma audiência conectada a tendências e recomendações genuínas.',
-    deliverables: 'Linguagem nativa · Review editorial · Engajamento em comentários',
+      'Conteúdo adaptado ao ritmo do TikTok para demonstrar produtos, rotinas e novidades de forma direta para a comunidade.',
+    deliverables: 'Formato nativo · Demonstração prática · Interação nos comentários',
   },
   {
     number: '04',
     title: 'Presença em eventos',
-    subtitle: 'Lançamentos, jantares e ativações presenciais',
+    subtitle: 'Participação presencial e cobertura em tempo real',
     description:
-      'Participação estratégica em experiências de marca, press trips e inaugurações, com cobertura estética em tempo real e relacionamento qualificado.',
-    deliverables: 'Presença dedicada · Cobertura em Stories · Registros autorais',
+      'Presença em lançamentos, encontros de marca, inaugurações e experiências, acompanhada de registros publicados durante a ação.',
+    deliverables: 'Participação presencial · Cobertura em Stories · Registros do evento',
   },
   {
     number: '05',
     title: 'Campanhas personalizadas',
-    subtitle: 'Projetos sob medida e embaixadorias sazonais',
+    subtitle: 'Pacotes sob demanda para objetivos específicos',
     description:
-      'Combinação estratégica de múltiplos formatos, direitos de uso de imagem e entregas contínuas desenhadas a partir dos objetivos comerciais da anunciante.',
-    deliverables: 'Plano multi-plataforma · Licenciamento sob consulta · Acompanhamento dedicado',
+      'Combinação de formatos entre Instagram, TikTok e eventos ajustada ao cronograma, briefing e orçamento da marca anunciante.',
+    deliverables: 'Escopo sob medida · Prazo combinado · Direitos de uso sob consulta',
   },
 ];
 
+/**
+ * Populate only with verified, proven brand partnerships.
+ * Leave empty to keep the section prepared for future insertion without inventing brands.
+ */
+export const BRAND_PARTNERS: BrandPartner[] = [];
+
+export const BRANDS_SECTION = {
+  kicker: 'Marcas',
+  headline: 'Espaço reservado para parcerias confirmadas.',
+  emptyNotice:
+    'Nenhuma marca parceira real foi cadastrada nesta demonstração. Ao adicionar parcerias confirmadas, os logotipos passam a ser exibidos nesta faixa.',
+  placeholderSlots: [
+    'Espaço preparado · Marca parceira 01',
+    'Espaço preparado · Marca parceira 02',
+    'Espaço preparado · Marca parceira 03',
+    'Espaço preparado · Marca parceira 04',
+    'Espaço preparado · Marca parceira 05',
+  ],
+} as const;
+
 export const DEMO_CONTACT = {
-  kicker: 'Contato Comercial',
-  headline: 'Vamos desenhar a próxima campanha da sua marca.',
+  kicker: 'Contato',
+  headline: 'Solicite uma parceria ou orçamento.',
   description:
-    'Solicite um orçamento direto pelo WhatsApp ou e-mail comercial para consultar disponibilidade de agenda, formatos recomendados e condições de parceria.',
-  whatsappLabel: 'Solicitar orçamento via WhatsApp',
+    'Entre em contato pelo WhatsApp ou e-mail comercial para verificar disponibilidade de agenda e receber uma proposta para a sua marca.',
+  primaryCta: 'Vamos criar algo juntas?',
   whatsappValue: '+55 (11) 90000-0000',
-  emailLabel: 'E-mail comercial demonstrativo',
+  emailLabel: 'E-mail comercial (ilustrativo)',
   emailValue: 'comercial@liviamartins.demo',
-  instagramLabel: 'Instagram demonstrativo',
+  instagramLabel: 'Instagram (ilustrativo)',
   instagramValue: '@liviamartins.demo',
   footerNote:
-    'Os contatos e indicadores acima são exclusivamente demonstrativos e pertencem à vitrine conceitual do produto Creator Pro — Prumo Creators. Não realizam atendimento ou envio real.',
+    'Demonstração do produto Creator Pro — Prumo Creators. Contatos exibidos são ilustrativos e não realizam envios reais.',
 } as const;
 
 export function buildWhatsappProposalMessage(selectedFormat: string | null): string {
   if (selectedFormat) {
-    return `Olá! Gostaria de solicitar um orçamento para parceria no formato "${selectedFormat}" com ${CREATOR_PROFILE.name} (${CREATOR_PROFILE.productName} · ${CREATOR_PROFILE.brandHouse}).`;
+    return `Olá! Gostaria de solicitar um orçamento de parceria com ${CREATOR_PROFILE.name} no formato "${selectedFormat}".`;
   }
-  return `Olá! Gostaria de solicitar o Media Kit e um orçamento de parceria comercial com ${CREATOR_PROFILE.name} (${CREATOR_PROFILE.productName} · ${CREATOR_PROFILE.brandHouse}).`;
+  return `Olá! Gostaria de solicitar um orçamento e consultar a disponibilidade de parceria com ${CREATOR_PROFILE.name}.`;
 }
-
-export const CREATOR_SHOWCASE_CONFIG = {
-  profile: CREATOR_PROFILE,
-  heroMedia: HERO_MEDIA,
-  insights: AUDIENCE_INSIGHTS,
-  about: ABOUT_SECTION,
-  campaigns: DEMO_CAMPAIGNS,
-  formats: PARTNERSHIP_FORMATS,
-  contact: DEMO_CONTACT,
-} as const;
