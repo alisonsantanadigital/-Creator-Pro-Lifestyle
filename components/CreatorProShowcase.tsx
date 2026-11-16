@@ -11,6 +11,7 @@ import { CommercialContactSection } from '@/components/CommercialContactSection'
 import { HeroSection } from '@/components/HeroSection';
 import { MobileStickyBar } from '@/components/MobileStickyBar';
 import { PartnershipFormatsSection } from '@/components/PartnershipFormatsSection';
+import { SceneDivider } from '@/components/SceneDivider';
 import { TopBar } from '@/components/TopBar';
 
 export function CreatorProShowcase() {
@@ -24,15 +25,21 @@ export function CreatorProShowcase() {
           <TopBar />
           <main>
             <HeroSection />
+            <SceneDivider tone="sand" />
             <AudienceInsightsSection />
+            <SceneDivider tone="sage" />
             <AboutSection />
+            <SceneDivider tone="terracotta" />
             <CampaignsSection />
+            <SceneDivider tone="sand" />
             <PartnershipFormatsSection
               selectedFormat={selectedFormat}
               onSelectFormat={(formatTitle) => setSelectedFormat(formatTitle)}
             />
+            <SceneDivider tone="sage" />
             <BrandsMarqueeSection />
           </main>
+          <SceneDivider tone="terracotta" />
           <CommercialContactSection
             selectedFormat={selectedFormat}
             onClearFormat={() => setSelectedFormat(null)}

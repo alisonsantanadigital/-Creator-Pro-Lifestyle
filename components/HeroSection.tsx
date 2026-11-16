@@ -22,8 +22,7 @@ export function HeroSection() {
     offset: ['start start', 'end start'],
   });
 
-  const portraitParallaxY = useTransform(scrollYProgress, [0, 1], [0, -34]);
-  const floatingParallaxY = useTransform(scrollYProgress, [0, 1], [0, 22]);
+  const portraitParallaxY = useTransform(scrollYProgress, [0, 1], [0, -32]);
 
   const nameWords = CREATOR_PROFILE.name.split(' ');
 
@@ -47,17 +46,13 @@ export function HeroSection() {
     <section
       id="topo"
       ref={sectionRef}
-      className="relative scroll-mt-20 overflow-x-clip pt-8 pb-16 sm:pt-12 sm:pb-24 lg:pt-14 lg:pb-28"
+      className="relative scroll-mt-20 overflow-x-clip bg-transparent pt-8 pb-16 sm:pt-12 sm:pb-24 lg:pt-14 lg:pb-28"
     >
       <div className="mx-auto max-w-[1240px] px-6 sm:px-10">
         {/* Top Editorial Margin Strip */}
-        <div className="mb-8 flex flex-wrap items-center justify-between gap-3 border-b border-[#DCD1C0]/75 pb-4 text-xs text-[#39483C]">
+        <div className="relative mb-8 flex flex-wrap items-center justify-between gap-3 pb-4 text-xs text-[#39483C]">
           <motion.div
-            animate={
-              prefersReducedMotion
-                ? undefined
-                : { y: [0, -3, 0] }
-            }
+            animate={prefersReducedMotion ? undefined : { y: [0, -2.5, 0] }}
             transition={{ duration: 6, repeat: Infinity, ease: 'easeInOut' }}
             className="flex items-center gap-2 font-medium"
           >
@@ -68,23 +63,28 @@ export function HeroSection() {
           <div className="flex items-center gap-2.5 text-[#585850]">
             <span>{CREATOR_PROFILE.headerMetaRight}</span>
           </div>
+
+          <div
+            aria-hidden="true"
+            className="absolute right-0 bottom-0 left-0 h-px bg-gradient-to-r from-[#DCD1C0]/85 via-[#DCD1C0]/50 to-transparent"
+          />
         </div>
 
-        <div className="grid grid-cols-1 items-stretch gap-12 lg:grid-cols-12 lg:gap-14">
-          {/* Left Column: Staggered Editorial Reveal */}
-          <div className="flex flex-col justify-between lg:col-span-6 lg:py-4">
+        <div className="grid grid-cols-1 items-center gap-10 lg:grid-cols-12 lg:gap-6">
+          {/* Left Column: Editorial Typography Integrated Directly onto Canvas */}
+          <div className="relative z-10 flex flex-col justify-between lg:col-span-5 lg:py-8">
             <div className="my-4 lg:my-auto lg:py-6">
               <motion.p
                 initial={prefersReducedMotion ? false : { opacity: 0, y: 12 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.45, ease: [0.16, 1, 0.3, 1] }}
+                transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
                 className="text-xs font-medium tracking-[0.14em] text-[#9E593F]"
               >
                 {CREATOR_PROFILE.role}
               </motion.p>
 
               {/* Staggered Word-by-Word Vertical Name Reveal */}
-              <h1 className="mt-4 font-serif text-[clamp(3.25rem,6.6vw,5.6rem)] leading-[0.94] font-normal tracking-[-0.025em] text-[#282824] text-balance">
+              <h1 className="mt-4 font-serif text-[clamp(3.25rem,6.5vw,5.6rem)] leading-[0.94] font-normal tracking-[-0.025em] text-[#282824] text-balance">
                 {nameWords.map((word, index) => (
                   <span
                     key={word}
@@ -97,9 +97,9 @@ export function HeroSection() {
                       }
                       animate={{ y: '0%', opacity: 1 }}
                       transition={{
-                        duration: 0.65,
+                        duration: 0.7,
                         delay: 0.08 + index * 0.1,
-                        ease: [0.16, 1, 0.3, 1],
+                        ease: [0.22, 1, 0.36, 1],
                       }}
                     >
                       {word}
@@ -112,17 +112,17 @@ export function HeroSection() {
               <motion.div
                 initial={prefersReducedMotion ? false : { scaleX: 0 }}
                 animate={{ scaleX: 1 }}
-                transition={{ duration: 0.55, delay: 0.25, ease: [0.16, 1, 0.3, 1] }}
+                transition={{ duration: 0.6, delay: 0.25, ease: [0.22, 1, 0.36, 1] }}
                 className="mt-6 h-px w-16 origin-left bg-[#BD765B]"
                 aria-hidden="true"
               />
 
               {/* Direct Positioning Phrase */}
               <motion.p
-                initial={prefersReducedMotion ? false : { opacity: 0, y: 18 }}
+                initial={prefersReducedMotion ? false : { opacity: 0, y: 16 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, delay: 0.28, ease: [0.16, 1, 0.3, 1] }}
-                className="mt-6 max-w-lg font-serif text-[clamp(1.55rem,2.4vw,2.05rem)] leading-[1.24] text-[#39483C]"
+                transition={{ duration: 0.65, delay: 0.28, ease: [0.22, 1, 0.36, 1] }}
+                className="mt-6 max-w-md font-serif text-[clamp(1.55rem,2.3vw,2rem)] leading-[1.24] text-[#39483C]"
               >
                 {CREATOR_PROFILE.positioning}
               </motion.p>
@@ -130,8 +130,8 @@ export function HeroSection() {
               <motion.p
                 initial={prefersReducedMotion ? false : { opacity: 0, y: 14 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.55, delay: 0.36, ease: [0.16, 1, 0.3, 1] }}
-                className="mt-3 max-w-[42ch] text-[15px] leading-[1.7] text-[#4E4E47]"
+                transition={{ duration: 0.6, delay: 0.36, ease: [0.22, 1, 0.36, 1] }}
+                className="mt-3 max-w-[38ch] text-[15px] leading-[1.7] text-[#4E4E47]"
               >
                 {CREATOR_PROFILE.introSummary}
               </motion.p>
@@ -140,7 +140,7 @@ export function HeroSection() {
               <motion.div
                 initial={prefersReducedMotion ? false : { opacity: 0, y: 14 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.55, delay: 0.44, ease: [0.16, 1, 0.3, 1] }}
+                transition={{ duration: 0.6, delay: 0.44, ease: [0.22, 1, 0.36, 1] }}
                 className="mt-10 flex flex-wrap items-center gap-5"
               >
                 <MagneticCtaButton
@@ -155,7 +155,11 @@ export function HeroSection() {
             </div>
 
             {/* Bottom Discrete Social Links */}
-            <div className="border-t border-[#DCD1C0]/75 pt-5">
+            <div className="relative mt-8 pt-5">
+              <div
+                aria-hidden="true"
+                className="absolute top-0 right-0 left-0 h-px bg-gradient-to-r from-[#DCD1C0]/85 via-[#DCD1C0]/45 to-transparent"
+              />
               <div className="flex flex-wrap items-center gap-x-5 gap-y-1 text-sm text-[#4E4E47]">
                 <button
                   type="button"
@@ -196,32 +200,36 @@ export function HeroSection() {
             </div>
           </div>
 
-          {/* Right Column: Luminous Gallery Frame with Subtle Depth & Parallax */}
-          <div className="relative lg:col-span-6">
+          {/* Right Column: Borderless Infinite-Edge Photograph Dissolving Seamlessly Into Canvas */}
+          <div className="relative lg:col-span-7 lg:-mr-8 xl:-mr-14">
+            {/* Soft warm halo directly behind her silhouette to harmonize with the global background */}
             <div
               aria-hidden="true"
-              className="pointer-events-none absolute -inset-6 -z-10 rounded-[48%_52%_44%_56%/54%_46%_54%_46%] bg-[radial-gradient(circle,rgba(245,241,233,0.9)_0%,rgba(220,209,192,0.3)_55%,transparent_75%)] blur-2xl"
+              className="pointer-events-none absolute inset-4 -z-10 rounded-full bg-[radial-gradient(circle_at_50%_45%,rgba(245,241,233,0.75)_0%,rgba(220,209,192,0.28)_50%,transparent_80%)] blur-3xl"
             />
+
             <motion.div
-              style={prefersReducedMotion ? undefined : { y: portraitParallaxY }}
-              initial={prefersReducedMotion ? false : { opacity: 0.85, scale: 0.985 }}
+              style={{
+                ...(prefersReducedMotion ? {} : { y: portraitParallaxY }),
+                maskImage:
+                  'radial-gradient(ellipse 72% 76% at 50% 45%, #000000 46%, rgba(0,0,0,0.88) 62%, rgba(0,0,0,0.42) 79%, rgba(0,0,0,0) 97%)',
+                WebkitMaskImage:
+                  'radial-gradient(ellipse 72% 76% at 50% 45%, #000000 46%, rgba(0,0,0,0.88) 62%, rgba(0,0,0,0.42) 79%, rgba(0,0,0,0) 97%)',
+              }}
+              initial={prefersReducedMotion ? false : { opacity: 0.72, scale: 0.985 }}
               animate={{ opacity: 1, scale: 1 }}
-              transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
-              className="relative h-full border border-[#DCD1C0]/80 bg-white/88 p-2.5 shadow-[0_28px_68px_-30px_rgba(40,40,36,0.14)] ring-1 ring-inset ring-white sm:p-4"
+              transition={{ duration: 0.9, ease: [0.22, 1, 0.36, 1] }}
+              className="relative w-full"
             >
               {HERO_MEDIA.videoUrl ? (
-                <div className="relative aspect-[3/4] overflow-hidden lg:aspect-auto lg:h-full lg:min-h-[620px]">
+                <div className="relative aspect-[3/4] w-full lg:aspect-auto lg:min-h-[680px]">
                   <video
                     src={HERO_MEDIA.videoUrl}
                     autoPlay
                     muted
                     loop
                     playsInline
-                    className="h-full w-full object-cover"
-                  />
-                  <div
-                    aria-hidden="true"
-                    className="pointer-events-none absolute inset-0 bg-gradient-to-t from-[#282824]/25 via-transparent to-transparent"
+                    className="h-full w-full object-cover object-top"
                   />
                 </div>
               ) : (
@@ -229,23 +237,13 @@ export function HeroSection() {
                   src={HERO_MEDIA.image}
                   alt={HERO_MEDIA.imageAlt}
                   priority
-                  sizes="(max-width: 1024px) 100vw, 50vw"
-                  aspectClassName="aspect-[3/4] lg:aspect-auto lg:h-full lg:min-h-[620px]"
+                  softFade
+                  sizes="(max-width: 1024px) 100vw, 58vw"
+                  aspectClassName="aspect-[3/4] w-full lg:min-h-[680px]"
                   fallbackTitle={CREATOR_PROFILE.name}
                   className="object-top"
                 />
               )}
-
-              {/* Subtle Floating Editorial Caption Strip */}
-              <motion.div
-                style={prefersReducedMotion ? undefined : { y: floatingParallaxY }}
-                className="mt-3 flex flex-wrap items-center justify-between gap-2 px-1 pb-0.5 text-xs text-[#585850]"
-              >
-                <span>{CREATOR_PROFILE.name}</span>
-                <span className="font-medium text-[#39483C]">
-                  {CREATOR_PROFILE.brandHouse} · {CREATOR_PROFILE.productName}
-                </span>
-              </motion.div>
             </motion.div>
           </div>
         </div>

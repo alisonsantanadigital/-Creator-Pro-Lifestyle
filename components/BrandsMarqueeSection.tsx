@@ -12,14 +12,14 @@ export function BrandsMarqueeSection() {
     <section
       id="marcas"
       aria-labelledby="marcas-heading"
-      className="scroll-mt-20 overflow-hidden border-t border-[#DCD1C0]/70 bg-[#F5F1E9]/35 py-20 sm:py-24"
+      className="scroll-mt-20 overflow-hidden bg-transparent py-20 sm:py-24"
     >
       <div className="mx-auto max-w-[1240px] px-6 sm:px-10">
         <motion.div
-          initial={prefersReducedMotion ? false : { opacity: 0, y: 14 }}
+          initial={prefersReducedMotion ? false : { opacity: 0, y: 16 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, amount: 0.3 }}
-          transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
+          transition={{ duration: 0.65, ease: [0.22, 1, 0.36, 1] }}
           className="flex flex-col justify-between gap-4 md:flex-row md:items-end"
         >
           <div>
@@ -42,15 +42,23 @@ export function BrandsMarqueeSection() {
         </motion.div>
       </div>
 
-      {/* Infinite Editorial Marquee */}
-      <div className="group/marquee relative mt-10 border-y border-[#DCD1C0]/75 bg-white/75 py-6">
+      {/* Infinite Editorial Marquee with CSS Edge-Mask Fade */}
+      <div
+        className="group/marquee relative mt-10 py-6"
+        style={{
+          maskImage:
+            'linear-gradient(to right, transparent 0%, black 10%, black 90%, transparent 100%)',
+          WebkitMaskImage:
+            'linear-gradient(to right, transparent 0%, black 10%, black 90%, transparent 100%)',
+        }}
+      >
         <div
           aria-hidden="true"
-          className="pointer-events-none absolute inset-y-0 left-0 z-10 w-12 bg-gradient-to-r from-white/95 to-transparent sm:w-20"
+          className="absolute top-0 right-0 left-0 h-px bg-gradient-to-r from-transparent via-[#DCD1C0]/75 to-transparent"
         />
         <div
           aria-hidden="true"
-          className="pointer-events-none absolute inset-y-0 right-0 z-10 w-12 bg-gradient-to-l from-white/95 to-transparent sm:w-20"
+          className="absolute right-0 bottom-0 left-0 h-px bg-gradient-to-r from-transparent via-[#DCD1C0]/75 to-transparent"
         />
 
         {hasVerifiedBrands ? (
@@ -84,7 +92,7 @@ export function BrandsMarqueeSection() {
               (slotLabel, idx) => (
                 <div
                   key={`${slotLabel}-${idx}`}
-                  className="flex min-h-[56px] min-w-[260px] items-center justify-center border border-dashed border-[#A8B2A0]/80 bg-white/90 px-6 py-3 shadow-[0_10px_28px_-20px_rgba(40,40,36,0.12)] grayscale transition-all duration-300 hover:border-[#BD765B] hover:grayscale-0"
+                  className="flex min-h-[56px] min-w-[260px] items-center justify-center border border-dashed border-[#A8B2A0]/75 bg-white/55 px-6 py-3 backdrop-blur-sm transition-colors duration-300 hover:border-[#BD765B]"
                 >
                   <span className="text-xs font-medium tracking-wide text-[#4E4E47] transition-colors duration-300 hover:text-[#39483C]">
                     {slotLabel}

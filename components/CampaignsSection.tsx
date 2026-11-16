@@ -179,7 +179,7 @@ export function CampaignsSection() {
     <section
       id="vitrine"
       aria-labelledby="vitrine-heading"
-      className="scroll-mt-20 overflow-x-clip border-t border-[#DCD1C0]/60 bg-transparent py-24 sm:py-28 lg:py-32"
+      className="scroll-mt-20 overflow-x-clip bg-transparent py-24 sm:py-28 lg:py-32"
     >
       <div className="mx-auto max-w-[1240px] px-6 sm:px-10">
         {/* Header + Filter Controls */}
@@ -187,8 +187,8 @@ export function CampaignsSection() {
           initial={prefersReducedMotion ? false : { opacity: 0, y: 18 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, amount: 0.25 }}
-          transition={{ duration: 0.55, ease: [0.16, 1, 0.3, 1] }}
-          className="flex flex-col justify-between gap-6 border-b border-[#DCD1C0]/75 pb-8 lg:flex-row lg:items-end"
+          transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
+          className="relative flex flex-col justify-between gap-6 pb-8 lg:flex-row lg:items-end"
         >
           <div>
             <div className="flex flex-wrap items-center gap-x-2.5 gap-y-1 text-xs font-medium tracking-[0.14em] text-[#9E593F]">
@@ -231,7 +231,8 @@ export function CampaignsSection() {
                   >
                     {category}
                     {isActive && (
-                      <span
+                      <motion.span
+                        layoutId="portfolioTabIndicator"
                         aria-hidden="true"
                         className="absolute right-0 bottom-0 left-0 h-[1.5px] bg-[#BD765B]"
                       />
@@ -241,6 +242,11 @@ export function CampaignsSection() {
               })}
             </div>
           </div>
+
+          <div
+            aria-hidden="true"
+            className="absolute right-0 bottom-0 left-0 h-px bg-gradient-to-r from-[#DCD1C0]/80 via-[#DCD1C0]/45 to-transparent"
+          />
         </motion.div>
 
         {/* Slider Navigation + Story-style Position Bar */}
@@ -288,7 +294,7 @@ export function CampaignsSection() {
               onClick={() => scrollToSlide(activeSlideIndex - 1)}
               disabled={activeSlideIndex === 0}
               aria-label="Conteúdo anterior"
-              className="inline-flex min-h-[44px] min-w-[44px] items-center justify-center border border-[#DCD1C0]/80 bg-white/90 text-[#282824] shadow-[0_8px_20px_-14px_rgba(40,40,36,0.2)] transition-colors duration-150 hover:border-[#39483C] hover:bg-white disabled:cursor-not-allowed disabled:opacity-40 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#39483C]"
+              className="inline-flex min-h-[44px] min-w-[44px] items-center justify-center border border-[#DCD1C0]/75 bg-white/65 text-[#282824] backdrop-blur-sm transition-colors duration-150 hover:border-[#39483C] hover:bg-white disabled:cursor-not-allowed disabled:opacity-40 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#39483C]"
             >
               <ArrowLeft className="h-4 w-4" />
             </button>
@@ -298,7 +304,7 @@ export function CampaignsSection() {
               onClick={() => scrollToSlide(activeSlideIndex + 1)}
               disabled={activeSlideIndex >= filteredCampaigns.length - 1}
               aria-label="Próximo conteúdo"
-              className="inline-flex min-h-[44px] min-w-[44px] items-center justify-center border border-[#DCD1C0]/80 bg-white/90 text-[#282824] shadow-[0_8px_20px_-14px_rgba(40,40,36,0.2)] transition-colors duration-150 hover:border-[#39483C] hover:bg-white disabled:cursor-not-allowed disabled:opacity-40 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#39483C]"
+              className="inline-flex min-h-[44px] min-w-[44px] items-center justify-center border border-[#DCD1C0]/75 bg-white/65 text-[#282824] backdrop-blur-sm transition-colors duration-150 hover:border-[#39483C] hover:bg-white disabled:cursor-not-allowed disabled:opacity-40 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#39483C]"
             >
               <ArrowRight className="h-4 w-4" />
             </button>
@@ -306,92 +312,100 @@ export function CampaignsSection() {
         </div>
       </div>
 
-      {/* Horizontal Drag & Swipe Magazine Track */}
-      <div className="mx-auto mt-8 max-w-[1240px] pl-6 sm:pl-10">
-        <div
-          ref={trackRef}
-          onScroll={handleTrackScroll}
-          onPointerDown={handlePointerDown}
-          onPointerMove={handlePointerMove}
-          onPointerUp={handlePointerUpOrLeave}
-          onPointerLeave={handlePointerUpOrLeave}
-          className="no-scrollbar flex cursor-grab items-end gap-6 overflow-x-auto pr-6 pb-4 select-none active:cursor-grabbing sm:gap-8 sm:pr-10"
-        >
-          {filteredCampaigns.map((campaign, idx) => {
-            const { widthClass, aspectClass } = getSlideContainerClass(
-              campaign.aspect
-            );
-            const hasVideo = Boolean(campaign.videoUrl);
-            const isVideoActive = hasVideo && hoveredVideoId === campaign.id;
+      {/* Borderless Editorial Photography Track */}
+      <div className="mx-auto mt-9 max-w-[1240px] pl-6 sm:pl-10">
+        <AnimatePresence mode="wait">
+          <motion.div
+            key={activeCategory}
+            initial={prefersReducedMotion ? false : { opacity: 0, y: 10 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={prefersReducedMotion ? undefined : { opacity: 0, y: -6 }}
+            transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
+            ref={trackRef}
+            onScroll={handleTrackScroll}
+            onPointerDown={handlePointerDown}
+            onPointerMove={handlePointerMove}
+            onPointerUp={handlePointerUpOrLeave}
+            onPointerLeave={handlePointerUpOrLeave}
+            className="no-scrollbar flex cursor-grab items-end gap-8 overflow-x-auto pr-6 pb-4 select-none active:cursor-grabbing sm:gap-10 sm:pr-10"
+          >
+            {filteredCampaigns.map((campaign, idx) => {
+              const { widthClass, aspectClass } = getSlideContainerClass(
+                campaign.aspect
+              );
+              const hasVideo = Boolean(campaign.videoUrl);
+              const isVideoActive = hasVideo && hoveredVideoId === campaign.id;
 
-            return (
-              <article
-                key={campaign.id}
-                data-editorial-slide
-                className={`group shrink-0 snap-start ${widthClass}`}
-                onMouseEnter={() => {
-                  if (hasVideo) setHoveredVideoId(campaign.id);
-                }}
-                onMouseLeave={() => {
-                  if (hasVideo) setHoveredVideoId(null);
-                }}
-              >
-                <button
-                  type="button"
-                  onClick={() => handleOpenLightbox(idx)}
-                  aria-label={`Ampliar publicação: ${campaign.title}`}
-                  className="relative block w-full border border-[#DCD1C0]/80 bg-white/90 p-2 text-left shadow-[0_20px_50px_-26px_rgba(40,40,36,0.14)] ring-1 ring-inset ring-white transition-all duration-200 group-hover:border-[#39483C]/55 group-hover:shadow-[0_26px_60px_-24px_rgba(40,40,36,0.2)] focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#39483C]"
+              return (
+                <article
+                  key={campaign.id}
+                  data-editorial-slide
+                  className={`group shrink-0 snap-start ${widthClass}`}
+                  onMouseEnter={() => {
+                    if (hasVideo) setHoveredVideoId(campaign.id);
+                  }}
+                  onMouseLeave={() => {
+                    if (hasVideo) setHoveredVideoId(null);
+                  }}
                 >
-                  <div className="relative overflow-hidden">
-                    {isVideoActive && campaign.videoUrl ? (
-                      <div className={`relative ${aspectClass}`}>
-                        <video
-                          src={campaign.videoUrl}
-                          autoPlay
-                          muted
-                          loop
-                          playsInline
-                          className="h-full w-full object-cover"
+                  <button
+                    type="button"
+                    onClick={() => handleOpenLightbox(idx)}
+                    aria-label={`Ampliar publicação: ${campaign.title}`}
+                    className="relative block w-full bg-transparent p-0 text-left focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#39483C]"
+                  >
+                    <div className="relative overflow-hidden shadow-[0_24px_54px_-32px_rgba(40,40,36,0.22)]">
+                      {isVideoActive && campaign.videoUrl ? (
+                        <div className={`relative ${aspectClass}`}>
+                          <video
+                            src={campaign.videoUrl}
+                            autoPlay
+                            muted
+                            loop
+                            playsInline
+                            className="h-full w-full object-cover"
+                          />
+                        </div>
+                      ) : (
+                        <EditorialImage
+                          src={campaign.image}
+                          alt={campaign.imageAlt}
+                          softFade
+                          sizes="(max-width: 768px) 85vw, 520px"
+                          aspectClassName={aspectClass}
+                          fallbackTitle={campaign.title}
+                          className="transition-transform duration-500 ease-out group-hover:scale-[1.02]"
                         />
-                      </div>
-                    ) : (
-                      <EditorialImage
-                        src={campaign.image}
-                        alt={campaign.imageAlt}
-                        sizes="(max-width: 768px) 85vw, 520px"
-                        aspectClassName={aspectClass}
-                        fallbackTitle={campaign.title}
-                        className="transition-transform duration-300 ease-out group-hover:scale-[1.02]"
-                      />
-                    )}
+                      )}
 
-                    <span
-                      aria-hidden="true"
-                      className="absolute right-3 bottom-3 inline-flex h-9 w-9 items-center justify-center bg-white/92 text-[#282824] opacity-0 shadow-sm transition-opacity duration-200 group-hover:opacity-100"
-                    >
-                      <Maximize2 className="h-3.5 w-3.5" />
+                      <span
+                        aria-hidden="true"
+                        className="absolute right-3 bottom-3 inline-flex h-9 w-9 items-center justify-center bg-white/88 text-[#282824] opacity-0 backdrop-blur-sm transition-opacity duration-200 group-hover:opacity-100"
+                      >
+                        <Maximize2 className="h-3.5 w-3.5" />
+                      </span>
+                    </div>
+                  </button>
+
+                  {/* Concise Unboxed Metadata */}
+                  <div className="mt-4 flex flex-wrap items-center gap-x-2 gap-y-1 text-xs text-[#585850]">
+                    <span className="font-medium text-[#9E593F]">
+                      {campaign.category}
                     </span>
+                    <span aria-hidden="true" className="text-[#BD765B]">
+                      ·
+                    </span>
+                    <span>{campaign.formatLabel}</span>
                   </div>
-                </button>
 
-                {/* Concise Unboxed Metadata */}
-                <div className="mt-4 flex flex-wrap items-center gap-x-2 gap-y-1 text-xs text-[#585850]">
-                  <span className="font-medium text-[#9E593F]">
-                    {campaign.category}
-                  </span>
-                  <span aria-hidden="true" className="text-[#BD765B]">
-                    ·
-                  </span>
-                  <span>{campaign.formatLabel}</span>
-                </div>
-
-                <h3 className="mt-1 font-serif text-2xl leading-[1.18] font-normal tracking-tight text-[#282824]">
-                  {campaign.title}
-                </h3>
-              </article>
-            );
-          })}
-        </div>
+                  <h3 className="mt-1 font-serif text-2xl leading-[1.18] font-normal tracking-tight text-[#282824]">
+                    {campaign.title}
+                  </h3>
+                </article>
+              );
+            })}
+          </motion.div>
+        </AnimatePresence>
       </div>
 
       {/* Lightbox Modal Zoom */}

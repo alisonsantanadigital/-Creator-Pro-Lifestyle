@@ -1,13 +1,13 @@
 import type { StaticImageData } from 'next/image';
 
-import heroLiviaImg from '@/src/assets/images/hero_livia_editorial_1794751047152.jpg';
-import aboutLiviaImg from '@/src/assets/images/about_livia_studio_1794751048731.jpg';
-import campaignBelezaBotanicaImg from '@/src/assets/images/campaign_beleza_botanica_1794751048911.jpg';
-import campaignLifestyleCasaImg from '@/src/assets/images/campaign_lifestyle_casa_1794751049328.jpg';
+import heroLiviaModernImg from '@/src/assets/images/hero_livia_modern_1794806509722.jpg';
+import aboutLiviaModernImg from '@/src/assets/images/about_livia_modern_1794806510803.jpg';
+import modernSkincareMirrorImg from '@/src/assets/images/modern_skincare_mirror_1794806510468.jpg';
+import modernMorningCoffeeImg from '@/src/assets/images/modern_morning_coffee_1794806511705.jpg';
+import modernCafeTerraceImg from '@/src/assets/images/modern_cafe_terrace_1794806512286.jpg';
+import modernStreetStrollImg from '@/src/assets/images/modern_street_stroll_1794806513482.jpg';
+import homePerfumeBedroomImg from '@/src/assets/images/home_perfume_bedroom_1794805560566.jpg';
 import campaignExperienciasResortImg from '@/src/assets/images/campaign_experiencias_resort_1794751050101.jpg';
-import campaignBelezaFragranciaImg from '@/src/assets/images/campaign_beleza_fragrancia_1794751049527.jpg';
-import editorialTerracottaRitualImg from '@/src/assets/images/editorial_terracotta_ritual_1794803047335.jpg';
-import editorialOlivePatioImg from '@/src/assets/images/editorial_olive_patio_1794803047706.jpg';
 
 export type CampaignCategory = 'Todas' | 'Beleza' | 'Lifestyle' | 'Experiências';
 
@@ -72,7 +72,7 @@ export const CREATOR_PROFILE = {
   role: 'Criadora de conteúdo digital',
   segments: 'Lifestyle, beleza e experiências',
   positioning: 'Lifestyle, beleza e experiências.',
-  introSummary: 'Conteúdo em foto e vídeo para marcas, produtos e ativações.',
+  introSummary: 'Conteúdo espontâneo em foto e vídeo para marcas e rotina real.',
   primaryCta: 'Vamos criar algo juntas?',
   headerMetaLeft: 'Media Kit · Creator Pro',
   headerMetaRight: 'Demonstração comercial',
@@ -86,9 +86,9 @@ export const HERO_MEDIA: {
   imageAlt: string;
   videoUrl?: string;
 } = {
-  image: heroLiviaImg,
+  image: heroLiviaModernImg,
   imageAlt:
-    'Retrato de Lívia Martins em blazer de linho claro sob iluminação natural.',
+    'Retrato natural de Lívia Martins de camisa branca aberta sobre regata canelada em apartamento iluminado com plantas.',
   videoUrl: undefined,
 };
 
@@ -157,16 +157,16 @@ export const ABOUT_SECTION = {
   kicker: 'Conteúdo',
   headline: 'O que Lívia produz.',
   paragraphs: [
-    'Publicações em foto e vídeo integrando produtos, beleza, rotina e experiências ao cotidiano de forma natural.',
+    'Registros naturais do dia a dia integrando beleza, estilo de vida e experiências com linguagem atual de criadora.',
   ],
-  image: aboutLiviaImg,
+  image: aboutLiviaModernImg,
   imageAlt:
-    'Lívia Martins sentada à mesa com caderno de anotações e xícara de cerâmica em ambiente com luz natural.',
-  imageCaptionLeft: 'Rotina e produção visual',
+    'Lívia Martins sentada no sofá ajustando o celular no tripé ao lado da janela iluminada.',
+  imageCaptionLeft: 'Bastidores e rotina diária',
   imageCaptionRight: 'Ilustrativo',
   pillars: [
     { label: 'Categorias', value: 'Lifestyle · Beleza · Experiências' },
-    { label: 'Temas', value: 'Rotina, produtos e viagens' },
+    { label: 'Temas', value: 'Rotina, skincare e cafés' },
     { label: 'Formatos', value: 'Stories · Reels · TikTok' },
   ],
 } as const;
@@ -180,76 +180,76 @@ export const CAMPAIGN_CATEGORIES: CampaignCategory[] = [
 
 export const DEMO_CAMPAIGNS: CampaignItem[] = [
   {
-    id: 'terracotta-ritual',
-    title: 'Objetos e rotina matinal',
-    formatLabel: 'Fotografia · Feed',
+    id: 'rotina-manha-cafe',
+    title: 'Café gelado e manhã em casa',
+    formatLabel: 'Foto espontânea · Feed',
     category: 'Lifestyle',
-    summary: 'Composição de rotina e papelaria em iluminação natural.',
+    summary: 'Registro matinal natural com café, anotações e luz direta da janela.',
     demoTag: 'Ilustrativo',
     aspect: 'portrait',
-    image: editorialTerracottaRitualImg,
+    image: modernMorningCoffeeImg,
     imageAlt:
-      'Vaso de terracota com ramos de oliveira, caderno aberto e óculos sobre pedra travertino.',
+      'Mesa clara com café gelado em copo canelado, caderno aberto, óculos de sol e tigela de frutas.',
   },
   {
-    id: 'atelier-botanique',
-    title: 'Skincare e textura',
-    formatLabel: 'Still de produto · Stories',
+    id: 'skincare-bancada',
+    title: 'Rotina de skincare na pia',
+    formatLabel: 'Produto no dia a dia · Stories',
     category: 'Beleza',
-    summary: 'Enquadramento limpo para embalagens e cuidados com a pele.',
+    summary: 'Sérum facial e lip balm sob luz da manhã com acessórios pessoais.',
     demoTag: 'Ilustrativo',
     aspect: 'landscape',
-    image: campaignBelezaBotanicaImg,
+    image: modernSkincareMirrorImg,
     imageAlt:
-      'Frasco de sérum facial em vidro fosco e pote cerâmico sobre pedra travertino.',
+      'Frasco de sérum fosco, lip balm, presilha tartaruga e argolas douradas na bancada iluminada.',
   },
   {
-    id: 'patio-oliveiras',
-    title: 'Arquitetura e hospedagem',
-    formatLabel: 'Panorâmica · Diário de viagem',
+    id: 'cafe-bairro-patio',
+    title: 'Tarde em café ao ar livre',
+    formatLabel: 'Experiência urbana · Reels',
     category: 'Experiências',
-    summary: 'Cobertura de espaços externos, hotéis e roteiros.',
+    summary: 'Cobertura leve de gastronomia, cafés locais e rotina fora de casa.',
     demoTag: 'Ilustrativo',
     aspect: 'wide',
-    image: editorialOlivePatioImg,
+    image: modernCafeTerraceImg,
     imageAlt:
-      'Pátio ensolarado com paredes claras, oliveiras em vasos de terracota e espreguiçadeira de linho.',
+      'Lívia Martins sorrindo ao usar o celular em mesa de mármore com café gelado e croissant em pátio ensolarado.',
   },
   {
-    id: 'casa-nomade',
-    title: 'Mesa posta e casa',
-    formatLabel: 'Fotografia · Feed',
+    id: 'caminhada-bairro',
+    title: 'Passeio de fim de tarde',
+    formatLabel: 'Estilo cotidiano · Feed',
     category: 'Lifestyle',
-    summary: 'Ambientação residencial para café, livros e decoração.',
+    summary: 'Look casual em linho e bolsa de palha com flores na rua arborizada.',
     demoTag: 'Ilustrativo',
     aspect: 'portrait',
-    image: campaignLifestyleCasaImg,
+    image: modernStreetStrollImg,
     imageAlt:
-      'Livro aberto sobre mesa de madeira clara ao lado de xícara de café e vaso cerâmico.',
+      'Lívia Martins caminhando sorrindo em rua arborizada com camiseta branca, calça de linho e bolsa com flores.',
   },
   {
-    id: 'villa-serena',
-    title: 'Destino e vista costeira',
-    formatLabel: 'Viagem · Stories e Reels',
+    id: 'fragrancia-quarto',
+    title: 'Fragrância junto à janela',
+    formatLabel: 'Detalhe de beleza · Feed',
+    category: 'Beleza',
+    summary: 'Perfume sobre criado-mudo com luz filtrada por cortina leve.',
+    demoTag: 'Ilustrativo',
+    aspect: 'landscape',
+    image: homePerfumeBedroomImg,
+    imageAlt:
+      'Frasco de perfume sobre madeira natural ao lado de bandeja cerâmica e folhas secas ao sol.',
+  },
+  {
+    id: 'fim-de-semana-costa',
+    title: 'Viagem leve de fim de semana',
+    formatLabel: 'Diário de viagem · Stories e Reels',
     category: 'Experiências',
-    summary: 'Registro de estada e ambiente para turismo e lazer.',
+    summary: 'Registro tranquilo de hospedagem com vista costeira ao entardecer.',
     demoTag: 'Ilustrativo',
     aspect: 'landscape',
     image: campaignExperienciasResortImg,
     imageAlt:
-      'Terraço de pedra clara com cortinas de linho e vista para o mar ao entardecer.',
-  },
-  {
-    id: 'maison-aurea',
-    title: 'Fragrância e cosméticos',
-    formatLabel: 'Still de lançamento · Feed',
-    category: 'Beleza',
-    summary: 'Produto em luz direcional para lançamentos de beleza.',
-    demoTag: 'Ilustrativo',
-    aspect: 'landscape',
-    image: campaignBelezaFragranciaImg,
-    imageAlt:
-      'Frasco minimalista de perfume em vidro transparente sobre tecido de seda claro.',
+      'Terraço claro com cortinas de linho ao vento e vista para o mar ao fim da tarde.',
   },
 ];
 

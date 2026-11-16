@@ -11,76 +11,98 @@ export function AmbientBackground() {
   const prefersReducedMotion = useReducedMotion();
   const { scrollYProgress } = useScroll();
 
-  const layerOneY = useTransform(scrollYProgress, [0, 1], [0, -110]);
-  const layerTwoY = useTransform(scrollYProgress, [0, 1], [0, 90]);
-  const layerThreeY = useTransform(scrollYProgress, [0, 1], [0, -70]);
+  const slowRiseY = useTransform(scrollYProgress, [0, 1], [0, -140]);
+  const slowDriftY = useTransform(scrollYProgress, [0, 1], [0, 110]);
+  const midParallaxY = useTransform(scrollYProgress, [0, 1], [0, -90]);
+  const subtleScale = useTransform(scrollYProgress, [0, 0.5, 1], [1, 1.04, 1]);
 
   return (
     <div
       aria-hidden="true"
-      className="pointer-events-none fixed inset-0 z-0 overflow-hidden bg-gradient-to-b from-[#FFFFFF] via-[#FCFAF7] to-[#FFFFFF]"
+      className="pointer-events-none fixed inset-0 z-0 overflow-hidden bg-[#FFFFFF]"
     >
-      {/* Top-right soft warm sand & off-white light wash */}
+      {/* Continuous Luminous White & Soft Sand Global Canvas Gradient */}
+      <div className="absolute inset-0 bg-[linear-gradient(180deg,#FFFFFF_0%,#FCF9F4_28%,#FAF6EE_55%,#FDFBF7_80%,#FFFFFF_100%)]" />
+
+      {/* Diffuse Ambient Radial Light Field — Upper Hero Atmosphere */}
       <motion.div
-        style={prefersReducedMotion ? undefined : { y: layerOneY }}
+        style={
+          prefersReducedMotion ? undefined : { y: slowRiseY, scale: subtleScale }
+        }
         animate={
           prefersReducedMotion
             ? undefined
             : {
-                x: [0, 26, -14, 0],
-                scale: [1, 1.04, 0.98, 1],
+                x: [0, 28, -18, 0],
+                opacity: [0.85, 1, 0.88, 0.85],
               }
         }
-        transition={{ duration: 28, repeat: Infinity, ease: 'easeInOut' }}
-        className="absolute -top-36 -right-28 h-[540px] w-[540px] rounded-[44%_56%_62%_38%/48%_42%_58%_52%] bg-[#F5F1E9] opacity-90 blur-[90px] sm:h-[680px] sm:w-[680px]"
+        transition={{ duration: 30, repeat: Infinity, ease: 'easeInOut' }}
+        className="absolute -top-40 right-[-8%] h-[680px] w-[720px] rounded-[46%_54%_60%_40%/48%_44%_56%_52%] bg-[radial-gradient(circle,rgba(245,241,233,0.95)_0%,rgba(220,209,192,0.44)_44%,rgba(189,118,91,0.09)_72%,transparent_100%)] blur-[95px]"
       />
 
-      {/* Mid-left delicate sage botanical glow */}
+      {/* Soft Illuminated Top-Left Mist (Seamless Behind Hero Typography) */}
       <motion.div
-        style={prefersReducedMotion ? undefined : { y: layerTwoY }}
+        style={prefersReducedMotion ? undefined : { y: slowDriftY }}
         animate={
           prefersReducedMotion
             ? undefined
             : {
-                x: [0, -24, 18, 0],
-                scale: [1, 0.97, 1.03, 1],
-              }
-        }
-        transition={{ duration: 32, repeat: Infinity, ease: 'easeInOut' }}
-        className="absolute top-[28%] -left-36 h-[460px] w-[520px] rounded-[58%_42%_39%_61%/44%_56%_44%_56%] bg-[#A8B2A0]/18 blur-[110px] sm:h-[620px] sm:w-[660px]"
-      />
-
-      {/* Center-right subtle terracotta warmth & sand relief */}
-      <motion.div
-        style={prefersReducedMotion ? undefined : { y: layerThreeY }}
-        animate={
-          prefersReducedMotion
-            ? undefined
-            : {
-                x: [0, 18, -22, 0],
-                scale: [1, 1.05, 0.97, 1],
+                x: [0, -22, 16, 0],
+                opacity: [0.65, 0.85, 0.65],
               }
         }
         transition={{ duration: 34, repeat: Infinity, ease: 'easeInOut' }}
-        className="absolute top-[58%] right-[-10%] h-[440px] w-[480px] rounded-[40%_60%_52%_48%/54%_38%_62%_46%] bg-[#DCD1C0]/42 blur-[115px] sm:h-[580px] sm:w-[620px]"
+        className="absolute top-[6%] -left-40 h-[560px] w-[580px] rounded-[58%_42%_46%_54%/44%_56%_44%_56%] bg-[radial-gradient(circle,rgba(255,255,255,0.9)_0%,rgba(245,241,233,0.75)_45%,rgba(168,178,160,0.16)_75%,transparent_100%)] blur-[105px]"
       />
 
-      {/* Lower soft terracotta blush accent */}
+      {/* Mid-Page Botanical Sage Organic Depth Layer */}
       <motion.div
-        style={prefersReducedMotion ? undefined : { y: layerOneY }}
+        style={prefersReducedMotion ? undefined : { y: midParallaxY }}
         animate={
           prefersReducedMotion
             ? undefined
             : {
-                x: [0, -16, 14, 0],
+                x: [0, 22, -26, 0],
+                scale: [1, 1.05, 0.97, 1],
               }
         }
-        transition={{ duration: 26, repeat: Infinity, ease: 'easeInOut' }}
-        className="absolute -bottom-32 left-[18%] h-[380px] w-[480px] rounded-[60%_40%_45%_55%/40%_55%_45%_60%] bg-[#BD765B]/10 blur-[120px] sm:h-[460px] sm:w-[580px]"
+        transition={{ duration: 36, repeat: Infinity, ease: 'easeInOut' }}
+        className="absolute top-[34%] left-[12%] h-[600px] w-[680px] rounded-[42%_58%_54%_46%/56%_38%_62%_44%] bg-[radial-gradient(circle,rgba(168,178,160,0.18)_0%,rgba(245,241,233,0.58)_50%,transparent_88%)] blur-[120px]"
       />
 
-      {/* Ultra-subtle radial paper vignette for architectural depth */}
-      <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_18%,rgba(255,255,255,0.45)_0%,rgba(245,241,233,0.22)_100%)]" />
+      {/* Mid-Right Subtle Warm Sand & Terracotta Light Relief */}
+      <motion.div
+        style={prefersReducedMotion ? undefined : { y: slowDriftY }}
+        animate={
+          prefersReducedMotion
+            ? undefined
+            : {
+                x: [0, -26, 18, 0],
+                opacity: [0.7, 0.92, 0.72, 0.7],
+              }
+        }
+        transition={{ duration: 32, repeat: Infinity, ease: 'easeInOut' }}
+        className="absolute top-[52%] -right-32 h-[580px] w-[620px] rounded-[50%_50%_40%_60%/55%_45%_55%_45%] bg-[radial-gradient(circle,rgba(220,209,192,0.45)_0%,rgba(189,118,91,0.11)_52%,transparent_88%)] blur-[115px]"
+      />
+
+      {/* Lower-Page Translucent Light Cloud Bridging Portfolio to Contact */}
+      <motion.div
+        style={prefersReducedMotion ? undefined : { y: slowRiseY }}
+        animate={
+          prefersReducedMotion
+            ? undefined
+            : {
+                x: [0, 18, -20, 0],
+                scale: [1, 0.98, 1.04, 1],
+              }
+        }
+        transition={{ duration: 38, repeat: Infinity, ease: 'easeInOut' }}
+        className="absolute -bottom-36 left-[18%] h-[520px] w-[680px] rounded-[60%_40%_48%_52%/44%_56%_44%_56%] bg-[radial-gradient(circle,rgba(245,241,233,0.85)_0%,rgba(168,178,160,0.15)_48%,rgba(189,118,91,0.09)_74%,transparent_100%)] blur-[120px]"
+      />
+
+      {/* Subtle Imperceptible Directional Shadow & Paper Relief Luminosity */}
+      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_50%_22%,rgba(255,255,255,0.52)_0%,rgba(245,241,233,0.2)_65%,rgba(220,209,192,0.12)_100%)]" />
     </div>
   );
 }

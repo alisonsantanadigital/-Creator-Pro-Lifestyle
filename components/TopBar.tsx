@@ -27,7 +27,7 @@ export function TopBar() {
   };
 
   return (
-    <header className="sticky top-0 z-40 border-b border-[#DCD1C0]/75 bg-white/85 shadow-[0_8px_30px_-24px_rgba(40,40,36,0.14)] backdrop-blur-md">
+    <header className="sticky top-0 z-40 border-b border-[#DCD1C0]/60 bg-white/75 backdrop-blur-md">
       <div className="mx-auto flex h-16 max-w-[1240px] items-center justify-between gap-8 px-6 sm:px-10">
         {/* Zone 1: Single-line Brand Wordmark */}
         <a
@@ -82,7 +82,7 @@ export function TopBar() {
       {mobileMenuOpen && (
         <div
           id="mobile-navigation"
-          className="border-t border-[#DCD1C0]/75 bg-white/95 px-6 py-5 backdrop-blur-md md:hidden"
+          className="border-t border-[#DCD1C0]/60 bg-white/95 px-6 py-5 backdrop-blur-md md:hidden"
         >
           <nav aria-label="Menu móvel" className="flex flex-col gap-1">
             {NAV_ITEMS.map((item) => (
@@ -90,7 +90,7 @@ export function TopBar() {
                 key={item.href}
                 href={item.href}
                 onClick={(e) => handleNavigate(e, item.href)}
-                className="flex min-h-[44px] items-center border-b border-[#DCD1C0]/70 text-sm font-medium text-[#282824] transition-colors duration-150 hover:text-[#39483C]"
+                className="flex min-h-[44px] items-center border-b border-[#DCD1C0]/60 text-sm font-medium text-[#282824] transition-colors duration-150 hover:text-[#39483C]"
               >
                 {item.label}
               </a>

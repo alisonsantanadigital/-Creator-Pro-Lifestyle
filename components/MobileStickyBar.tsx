@@ -61,7 +61,7 @@ export function MobileStickyBar() {
           animate={{ opacity: 1, y: 0 }}
           exit={prefersReducedMotion ? { opacity: 0 } : { opacity: 0, y: 20 }}
           transition={{ duration: 0.22, ease: [0.16, 1, 0.3, 1] }}
-          className="fixed right-0 bottom-0 left-0 z-40 border-t border-[#DCD1C0]/80 bg-white/92 px-4 py-2.5 shadow-[0_-10px_30px_-18px_rgba(40,40,36,0.16)] backdrop-blur-md md:hidden"
+          className="fixed right-0 bottom-0 left-0 z-40 border-t border-[#DCD1C0]/70 bg-white/88 px-4 py-2.5 backdrop-blur-md md:hidden"
         >
           <div className="mx-auto flex items-center justify-between gap-3">
             <div className="min-w-0">

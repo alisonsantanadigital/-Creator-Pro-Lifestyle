@@ -11,6 +11,7 @@ interface EditorialImageProps {
   priority?: boolean;
   fallbackTitle?: string;
   aspectClassName?: string;
+  softFade?: boolean;
 }
 
 export function EditorialImage({
@@ -21,6 +22,7 @@ export function EditorialImage({
   priority = false,
   fallbackTitle = 'Fotografia editorial',
   aspectClassName = 'aspect-[4/3]',
+  softFade = false,
 }: EditorialImageProps) {
   const [hasError, setHasError] = useState(false);
 
@@ -29,7 +31,7 @@ export function EditorialImage({
       <div
         role="img"
         aria-label={alt}
-        className={`relative flex w-full items-center justify-center overflow-hidden bg-[#ECE5D8] text-center ${aspectClassName} ${className}`}
+        className={`relative flex w-full items-center justify-center overflow-hidden bg-[#F5F1E9] text-center ${aspectClassName} ${className}`}
       >
         <div className="px-6 py-8">
           <p className="font-serif text-lg text-[#282824]">{fallbackTitle}</p>
@@ -42,7 +44,9 @@ export function EditorialImage({
   }
 
   return (
-    <div className={`relative overflow-hidden bg-[#ECE5D8] ${aspectClassName}`}>
+    <div
+      className={`relative overflow-hidden ${softFade ? 'bg-transparent' : 'bg-[#F5F1E9]'} ${aspectClassName}`}
+    >
       <Image
         src={src}
         alt={alt}
